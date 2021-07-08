@@ -1,11 +1,11 @@
-.header__actions-container {
-    grid-area: headerRight;
+.actionsContainer {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-right: 7%;
 }
 
-.header__action {
+.action {
     margin: 0 0.688rem;
+    cursor: pointer;
 }

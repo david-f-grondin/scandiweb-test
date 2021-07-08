@@ -1,19 +1,18 @@
 import React from 'react';
-import './header.css';
-import HeaderNavigation from '../headerNavigation/headerNavigation';
+import styles from './styles/header.module.scss';
 import { ReactComponent as HeaderLogo } from './a-logo.svg';
-import HeaderActions from '../headerActions/headerActions';
 
 class Header extends React.Component {
-    render() {
-        return (
-          <div className="header">
-              <HeaderNavigation/>
-              <HeaderLogo className="header__logo"/>
-              <HeaderActions/>
-          </div>
-        );
-      }
+  render() {
+    let { headerNavigation: HeaderNavigation, headerActions: HeaderActions} = this.props;
+    return (
+      <div className={styles.header}>
+        <HeaderNavigation />
+        <HeaderLogo className={styles.headerLogo} />
+        <HeaderActions />
+      </div>
+    );
+  }
 }
 
 export default Header;
