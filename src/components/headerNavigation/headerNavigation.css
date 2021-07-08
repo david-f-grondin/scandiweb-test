@@ -1,0 +1,6 @@
+.header__navigation {
+    grid-area: headerLeft;
+    display: flex;
+    margin-left: 7%;
+    font-family: 'Raleway', sans-serif;
+}
