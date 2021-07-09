@@ -5,4 +5,9 @@
     row-gap: 6.438rem;
     column-gap: 2.5rem;
     margin: 0 6.375rem 11.938rem 6.25rem;
+    
+    &:after {
+        content: "";
+        flex: auto;
+    }
 }

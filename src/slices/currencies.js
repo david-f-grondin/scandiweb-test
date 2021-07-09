@@ -19,8 +19,9 @@ export const currenciesSlice = createSlice({
             state.selectedCurrency = action.payload
         },
         setAllCurrencies: (state, action) => {
-            state.currencies = action.payload
-            state.selectedCurrency = action.payload ? action.payload[0] : ""
+            let currencies = action.payload;
+            state.currencies = currencies;
+            state.selectedCurrency = (currencies === undefined || currencies.length === 0) ? "" : currencies[0]
         }
     },
 })

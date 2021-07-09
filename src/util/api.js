@@ -7,7 +7,8 @@ export const initAPI = () => {
 
 export const getAllCurrenciesAPI = async () => {
     const query = new Query('currencies', true);
-    return await makeQuery(query);
+    let response = await makeQuery(query);
+    return response.currencies;
 }
 
 export const getAllProductsAPI = async () => {
@@ -27,8 +28,7 @@ export const getAllProductsAPI = async () => {
                 .addField(new Field('items', true)
                     .addFieldList(attributeFields))));
     let response = await makeQuery(query);
-    console.log(response);
-    return response;
+    return response.category.products;
 }
 
 const makeQuery = async (query) => {

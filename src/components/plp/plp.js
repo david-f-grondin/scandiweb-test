@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from './styles/plp.module.scss';
-import PlpCategory from './plpCategory';
-import PlpProducts from './plpProducts';
 
 class Plp extends React.Component {
   render() {
+    let { plpProducts: PlpProducts, plpCategory: PlpCategory } = this.props;
     return (
       <div className={styles.plpContainer}>
         <PlpCategory />

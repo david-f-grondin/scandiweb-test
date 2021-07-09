@@ -1,17 +1,22 @@
 import React from 'react';
 import styles from './styles/plpProductCard.module.scss';
 import cartLogo from '../../images/emptyCart.svg';
+import convertToSymbol from '../../util/currencyConverter';
+import { productPriceSelector } from '../../store/selectors';
 
 class PlpProductCard extends React.Component {
   render() {
+    let price = productPriceSelector(this.props.product, this.props.selectedCurrency);
     return (
       <div className={styles.productsCard}>
-        <img src="https://images.canadagoose.com/image/upload/w_480,c_scale,f_auto,q_auto:best/v1576016105/product-image/2409L_61.jpg" alt=""/>
+        <div className={styles.productImageContainer}>
+          <img className={styles.productImage} src={this.props.product.gallery[0]} alt=""/>
+        </div>
         <div className={styles.circle}>
           <img src={cartLogo} alt=""/>
         </div>
-        <div className={styles.productTitle}>Apollo Running Short</div>
-        <div className={styles.price}>$50.00</div>
+        <div className={styles.productTitle}>{this.props.product.name}</div>
+        <div className={styles.price}>{convertToSymbol(price.currency) + price.amount}</div>
       </div>
     );
   }

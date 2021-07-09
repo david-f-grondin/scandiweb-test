@@ -1,12 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    categories: [
-        "WOMEN",
-        "MEN",
-        "KIDS"
-    ],
-    selectedCategory: "WOMEN"
+    categories: [],
+    selectedCategory: ""
 }
 
 export const categoriesSlice = createSlice({
@@ -16,9 +12,17 @@ export const categoriesSlice = createSlice({
         selectCategory: (state, action) => {
             state.selectedCategory = action.payload
         },
+        // Get all existing categories from a list of products
         setAllCategories: (state, action) => {
-            state.categories = action.payload
-            state.selectedCategory = action.payload ? action.payload[0] : ""
+            let categories = []
+            let products = action.payload
+            products.forEach((product) => {
+                let category = product.category
+                if (!categories.includes(category))
+                    categories.push(category)
+            })
+            state.categories = categories
+            state.selectedCategory = (categories === undefined || categories.length === 0) ? "" : categories[0]
         }
     },
 })

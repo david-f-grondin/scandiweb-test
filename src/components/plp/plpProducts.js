@@ -1,17 +1,21 @@
 import React from 'react';
 import styles from './styles/plpProducts.module.scss';
-import PlpProductCard from './plpProductCard';
 
 class PlpProducts extends React.Component {
   render() {
+    let { plpProductCard: PlpProductCard } = this.props;
     return (
       <div className={styles.productsContainer}>
-        <PlpProductCard />
-        <PlpProductCard />
-        <PlpProductCard />
-        <PlpProductCard />
-        <PlpProductCard />
-        <PlpProductCard />
+        {
+          this.props.products.map( (product) => {
+            return (
+              <PlpProductCard
+                key={product.id}
+                product={product}
+              />
+            )
+          })
+        }
       </div>
     );
   }

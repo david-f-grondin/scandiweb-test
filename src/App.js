@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './App.scss';
 import Header from './containers/header/header';
-import Plp from './components/plp/plp';
+import Plp from './containers/plp/plp';
 import { initAPI, getAllCurrenciesAPI, getAllProductsAPI } from './util/api.js';
+import { setAllCategories } from './slices/categories';
 import { setAllCurrencies } from './slices/currencies';
 import { setAllProducts } from './slices/products';
 
@@ -15,6 +16,7 @@ class App extends React.Component {
     this.props.setAllCurrencies(response);
     response = await getAllProductsAPI();
     this.props.setAllProducts(response);
+    this.props.setAllCategories(response);
   }
 
   render() {
@@ -28,6 +30,9 @@ class App extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
+  setAllCategories: (payload) => {
+    dispatch(setAllCategories(payload));
+  },
   setAllCurrencies: (payload) => {
     dispatch(setAllCurrencies(payload));
   },
