@@ -81,3 +81,18 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+html{
+  /* 
+    Allow content to display behind the scrollbar.
+    Used in order to keep the exact dimensions of the design with a screen width of 1440px
+  */
+  overflow-y: overlay;
+}
+
+.App{
+  min-height: 100vh;
+  display:flex;
+  flex-direction:column;
+  font-family: 'Raleway', sans-serif;
+}
