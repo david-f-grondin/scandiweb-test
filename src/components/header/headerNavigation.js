@@ -10,9 +10,9 @@ class HeaderNavigation extends React.Component {
             this.props.categories.map(category => {
               return (
                 <HeaderCategory
-                  key={category.name}
+                  key={category}
                   category={category}
-                  selected={category.name === this.props.selectedCategory.name ? true : false}
+                  selected={category === this.props.selectedCategory ? true : false}
                 />
               )
             })

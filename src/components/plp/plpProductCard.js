@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles/plpProductCard.module.scss';
-import cartLogo from '../images/emptyCart.svg';
+import cartLogo from '../../images/emptyCart.svg';
 
 class PlpProductCard extends React.Component {
   render() {

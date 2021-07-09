@@ -2,17 +2,11 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     categories: [
-        {
-            name: "WOMEN"
-        },
-        {
-            name: "MEN"
-        },
-        {
-            name: "KIDS"
-        }
+        "WOMEN",
+        "MEN",
+        "KIDS"
     ],
-    selectedCategory: { name: "WOMEN" }
+    selectedCategory: "WOMEN"
 }
 
 export const categoriesSlice = createSlice({
@@ -22,9 +16,13 @@ export const categoriesSlice = createSlice({
         selectCategory: (state, action) => {
             state.selectedCategory = action.payload
         },
+        setAllCategories: (state, action) => {
+            state.categories = action.payload
+            state.selectedCategory = action.payload ? action.payload[0] : ""
+        }
     },
 })
 
-export const { selectCategory } = categoriesSlice.actions
+export const { selectCategory, setAllCategories } = categoriesSlice.actions
 
 export default categoriesSlice.reducer

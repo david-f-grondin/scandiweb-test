@@ -9,7 +9,7 @@ class HeaderCategory extends React.Component {
     const classes = `${styles.category} ${this.props.selected ? styles.selected : ''}`
     return (
       <div className={classes} onClick={this.handleClick}>
-        <span>{this.props.category.name}</span>
+        <span>{this.props.category}</span>
       </div>
     );
   }
