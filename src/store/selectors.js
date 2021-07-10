@@ -10,4 +10,8 @@ export const productsCurrentCategorySelector = ({products, categories}) => produ
 export const productPriceSelector = (product, currency) => product.prices.find((price) => price.currency === currency);
 
 // Currencies
+export const currenciesSelector = ({currencies}) => currencies.currencies;
 export const selectedCurrencySelector = ({currencies}) => currencies.selectedCurrency;
+
+// States
+export const currencySwitcherStateSelector = ({states}) => states.isCurencySwitcherOpen;

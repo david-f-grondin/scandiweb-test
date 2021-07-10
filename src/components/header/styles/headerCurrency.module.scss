@@ -1,3 +1,41 @@
+.currencyContainer {
+    height: 100%;
+    position: relative;
+}
+
 .currency {
     margin-right: 0.625rem;
+    font-weight: 500;
+    font-size: 1.125em;
+}
+
+.currencyButton {
+    height: 100%;
+    padding: 0 0.688rem;
+}
+
+.arrowUp {
+    $angle: 180deg;
+    -webkit-transform:rotate($angle);
+    -moz-transform: rotate($angle);
+    -ms-transform: rotate($angle);
+    -o-transform: rotate($angle);
+    transform: rotate($angle);
+}
+
+.currencySwitcher {
+    position: absolute;
+    top: 100%;
+    left: -0.562rem;
+    margin-top: -0.938rem;
+    box-shadow: 0px 4px 35px hsla(210, 5%, 67%, 0.19);
+}
+
+.currencyOption {
+    width: 100%;
+    padding: 1.25rem 2.375rem 1.25rem 1.25rem;
+    text-align: left;
+    font-size: 1.125em;
+    font-weight: 500;
+    line-height: 1.6em;
 }

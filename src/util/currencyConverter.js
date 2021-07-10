@@ -3,7 +3,8 @@ const currencySymbols = {
     "GBP": '£',
     "AUD": 'A$',
     "JPY": '¥',
-    "RUB": '₽' 
+    "RUB": '₽',
+    "EUR" : '€'
 }
 
 const convertToSymbol = (currency) => {
