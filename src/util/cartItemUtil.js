@@ -2,8 +2,7 @@
 export const isSameItem = (item1, item2) => {
     if (item1.id === item2.id) {
         item1.attributes.forEach((attribute, index) => {
-            if (attribute.selected !== item2.attributes[index])
-                return false;
+            if (attribute.selected !== item2.attributes[index]) return false;
         });
         return true;
     } else {
@@ -33,21 +32,22 @@ export const productToItem = (product) => {
             return { ...item, selected: selectedValue };
         });
         return { ...attribute, items: attributeItem };
-
     });
     const newItem = {
         ...product,
         count: 1,
-        attributes: newItemAttributes
-    }
+        attributes: newItemAttributes,
+    };
     return newItem;
 };
 
 // Compute the total price of the cart for a given currency
 export const computeCartTotal = (cartItems, currency) => {
     let totalPrice = 0;
-    cartItems.forEach(item => {
-        totalPrice += item.count * item.prices.find(price => price.currency === currency).amount;
+    cartItems.forEach((item) => {
+        totalPrice +=
+            item.count *
+            item.prices.find((price) => price.currency === currency).amount;
     });
     return totalPrice;
 };
@@ -58,10 +58,8 @@ export const removeItemInCart = (itemToRemove, cartItems) => {
         return isSameItem(itemToRemove, cartItem);
     });
     if (index > -1) {
-        if (cartItems[index].count <= 1)
-            cartItems.splice(index, 1);
-        else
-            cartItems[index].count--;
+        if (cartItems[index].count <= 1) cartItems.splice(index, 1);
+        else cartItems[index].count--;
     }
     return cartItems;
 };

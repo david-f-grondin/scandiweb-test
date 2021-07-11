@@ -1,12 +1,12 @@
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import HeaderCategory from '../../components/header/headerCategory';
-import { selectCategory } from '../../slices/categories';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import HeaderCategory from "../../components/header/headerCategory";
+import { selectCategory } from "../../slices/categories";
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        selectCategory: bindActionCreators(selectCategory, dispatch)
-    }
-}
+        selectCategory: bindActionCreators(selectCategory, dispatch),
+    };
+};
 
-export default connect(null, mapDispatchToProps)(HeaderCategory)
+export default connect(null, mapDispatchToProps)(HeaderCategory);

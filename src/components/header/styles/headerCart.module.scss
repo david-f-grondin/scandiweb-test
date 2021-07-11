@@ -8,8 +8,28 @@
     padding: 0 0.688rem;
 }
 
+.cartLogoContainer {
+    position: relative;
+}
+
 .cartLogo {
     vertical-align: middle;
+}
+
+.cartCountCircle {
+    position: absolute;
+    right: -75%;
+    top: -25%;
+    width: 1.3rem;
+    line-height: 1.1rem;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 0.875em;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    background: var(--c-black);
+    border: 2px solid var(--c-black);
+    color: var(--c-white);
 }
 
 .minicart {
@@ -39,7 +59,7 @@
 }
 
 .totalText {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 500;
     line-height: 1.125em;
 }

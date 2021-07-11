@@ -1,11 +1,11 @@
-import { connect } from 'react-redux';
-import HeaderActions from '../../components/header/headerActions';
-import HeaderCurrency from './headerCurrency';
-import HeaderCart from './headerCart';
+import { connect } from "react-redux";
+import HeaderActions from "../../components/header/headerActions";
+import HeaderCurrency from "./headerCurrency";
+import HeaderCart from "./headerCart";
 
 const mapStateToProps = (state, ownProps) => ({
     headerCurrency: HeaderCurrency,
-    headerCart: HeaderCart
-})
+    headerCart: HeaderCart,
+});
 
-export default connect(mapStateToProps)(HeaderActions)
+export default connect(mapStateToProps)(HeaderActions);

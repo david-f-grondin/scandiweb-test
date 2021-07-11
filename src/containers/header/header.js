@@ -1,11 +1,11 @@
-import { connect } from 'react-redux';
-import Header from '../../components/header/header';
-import HeaderAction from './headerActions';
-import HeaderNavigation from './headerNavigation';
+import { connect } from "react-redux";
+import Header from "../../components/header/header";
+import HeaderAction from "./headerActions";
+import HeaderNavigation from "./headerNavigation";
 
 const mapStateToProps = (state, ownProps) => ({
     headerNavigation: HeaderNavigation,
-    headerActions: HeaderAction
-})
+    headerActions: HeaderAction,
+});
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps)(Header);
