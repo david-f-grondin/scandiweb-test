@@ -14,6 +14,7 @@ export const currenciesSelector = ({currencies}) => currencies.currencies;
 export const selectedCurrencySelector = ({currencies}) => currencies.selectedCurrency;
 
 // Cart
+export const cartItemsSelector = ({cart}) => cart.items;
 export const selectedItemSelector = ({cart}) => cart.selectedItem;
 
 // States

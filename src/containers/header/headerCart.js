@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import HeaderCart from '../../components/header/headerCart';
-import { minicartStateSelector } from '../../store/selectors';
+import { minicartStateSelector, cartItemsSelector, selectedCurrencySelector } from '../../store/selectors';
 import { setMinicartState } from '../../slices/states';
 import CartItems from '../cart/cartItems';
 
 const mapStateToProps = (state, ownProps) => ({
-    cart: {},
+    cart: cartItemsSelector(state),
     isMinicartOpen: minicartStateSelector(state),
+    selectedCurrency: selectedCurrencySelector(state),
     cartItems: CartItems
 })
 

@@ -32,7 +32,7 @@ export const productToItem = (product) => {
             }
             return { ...item, selected: selectedValue };
         });
-        return { ...attribute, items:attributeItem};
+        return { ...attribute, items: attributeItem };
 
     });
     const newItem = {
@@ -41,4 +41,27 @@ export const productToItem = (product) => {
         attributes: newItemAttributes
     }
     return newItem;
+};
+
+// Compute the total price of the cart for a given currency
+export const computeCartTotal = (cartItems, currency) => {
+    let totalPrice = 0;
+    cartItems.forEach(item => {
+        totalPrice += item.count * item.prices.find(price => price.currency === currency).amount;
+    });
+    return totalPrice;
+};
+
+// Remove one cartItem from cart items array and return the new array
+export const removeItemInCart = (itemToRemove, cartItems) => {
+    let index = cartItems.findIndex((cartItem) => {
+        return isSameItem(itemToRemove, cartItem);
+    });
+    if (index > -1) {
+        if (cartItems[index].count <= 1)
+            cartItems.splice(index, 1);
+        else
+            cartItems[index].count--;
+    }
+    return cartItems;
 };
