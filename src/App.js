@@ -4,6 +4,7 @@ import "./App.scss";
 import Header from "./containers/header/header";
 import Plp from "./containers/plp/plp";
 import { initAPI, getAllCurrenciesAPI, getAllProductsAPI } from "./util/api.js";
+import { minicartStateSelector } from "./store/selectors";
 import { setAllCategories } from "./slices/categories";
 import { setAllCurrencies } from "./slices/currencies";
 import { setAllProducts } from "./slices/products";
@@ -23,10 +24,15 @@ class App extends React.Component {
             <div className="App">
                 <Header />
                 <Plp />
+                {this.props.isMinicartOpen ? <div className="overlay" /> : null}
             </div>
         );
     }
 }
+
+const mapStateToProps = (state, ownProps) => ({
+    isMinicartOpen: minicartStateSelector(state),
+});
 
 const mapDispatchToProps = (dispatch) => ({
     setAllCategories: (payload) => {
@@ -40,4 +46,4 @@ const mapDispatchToProps = (dispatch) => ({
     },
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
