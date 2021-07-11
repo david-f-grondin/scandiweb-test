@@ -8,6 +8,11 @@ class Plp extends React.Component {
       <div className={styles.plpContainer}>
         <PlpCategory />
         <PlpProducts />
+        {
+          (this.props.isMinicartOpen) ?
+            <div className={styles.overlay}></div>
+            : null
+        }
       </div>
     );
   }

@@ -13,5 +13,9 @@ export const productPriceSelector = (product, currency) => product.prices.find((
 export const currenciesSelector = ({currencies}) => currencies.currencies;
 export const selectedCurrencySelector = ({currencies}) => currencies.selectedCurrency;
 
+// Cart
+export const selectedItemSelector = ({cart}) => cart.selectedItem;
+
 // States
 export const currencySwitcherStateSelector = ({states}) => states.isCurencySwitcherOpen;
+export const minicartStateSelector = ({states}) => states.isMinicartOpen;

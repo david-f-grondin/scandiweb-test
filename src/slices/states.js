@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     isCurencySwitcherOpen: false,
@@ -10,14 +10,20 @@ export const statesSlice = createSlice({
     initialState,
     reducers: {
         setCurrencySwitcherState: (state, action) => {
-            state.isCurencySwitcherOpen = action.payload
+            let isCurencySwitcherOpen = action.payload;
+            state.isCurencySwitcherOpen = isCurencySwitcherOpen;
+            if (isCurencySwitcherOpen)
+                state.isMinicartOpen = false;
         },
         setMinicartState: (state, action) => {
-            state.isMinicartOpen = action.payload
+            let isMinicartOpen = action.payload;
+            state.isMinicartOpen = isMinicartOpen;
+            if (isMinicartOpen)
+                state.isCurencySwitcherOpen = false;
         }
     },
 })
 
-export const { setCurrencySwitcherState, setMinicartState } = statesSlice.actions
+export const { setCurrencySwitcherState, setMinicartState } = statesSlice.actions;
 
-export default statesSlice.reducer
+export default statesSlice.reducer;

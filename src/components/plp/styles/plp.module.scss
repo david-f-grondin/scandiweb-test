@@ -1,6 +1,13 @@
 .plpContainer {
     flex-grow: 1;
+    position: relative;
 }
 
-.test {
+.overlay {
+    background-color: var(--c-gray-overlay);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
 }

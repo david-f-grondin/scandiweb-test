@@ -5,10 +5,10 @@ import convertToSymbol from '../../util/currencyConverter';
 
 class HeaderCurrency extends React.Component {
     currencyClicked = e => {
-        this.props.setCurrencySwitcherState(!this.props.isCurencySwitcherOpen)
+        this.props.setCurrencySwitcherState(!this.props.isCurencySwitcherOpen);
     };
     currencyOptionClicked = (currency) => {
-        this.props.selectCurrency(currency)
+        this.props.selectCurrency(currency);
     };
     render() {
         return (
@@ -37,7 +37,7 @@ class HeaderCurrency extends React.Component {
                                         <button key={currency} className={styles.currencyOption}
                                             onClick={() => this.currencyOptionClicked(currency)}
                                         >
-                                            {convertToSymbol(currency) + currency}
+                                            {convertToSymbol(currency) + ' ' + currency}
                                         </button>
                                     )
                                 })
