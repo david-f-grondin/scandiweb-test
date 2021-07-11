@@ -1,15 +1,14 @@
 .cartItems {
-
 }
 
 .item {
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-columns: 1fr auto auto;
-    grid-template-areas: 
-    "namePrice addItem image" 
-    "namePrice ....... image"
-    "attributes removeItem image";
+    grid-template-areas:
+        "namePrice addItem image"
+        "namePrice ....... image"
+        "attributes removeItem image";
     margin-bottom: 2.5rem;
 }
 
@@ -34,54 +33,40 @@
 .attributes {
     grid-area: attributes;
     align-self: end;
-    display: flex;
-    font-size: 0.875em;
-    line-height: 1.6em;
-    font-family: 'Source Sans Pro', sans-serif;
-}
-.attributesButton {
-    width: 1.5rem;
-    margin-right: 0.5rem;
-    border: 1px solid var(--c-black);
 }
 
 .addItem {
     grid-area: addItem;
     align-self: start;
-    background:
-    linear-gradient(var(--c1),var(--c1)) content-box,
-    linear-gradient(var(--c1),var(--c1)) content-box,
-    var(--c2);
+    background: linear-gradient(var(--c1), var(--c1)) content-box,
+        linear-gradient(var(--c1), var(--c1)) content-box, var(--c2);
 }
 
 .removeItem {
     grid-area: removeItem;
     align-self: end;
-    background:
-    linear-gradient(var(--c1),var(--c1)) content-box,
-    var(--c2);
+    background: linear-gradient(var(--c1), var(--c1)) content-box, var(--c2);
 }
 
 .button {
     border: 1px solid var(--c-black);
-    
-    --t:1px;   /* Thickness */
-    --l:25px;  /* size of the symbol */
-    --s:8px;  /* space around the symbol */
-    --c1:var(--c-black); /* Plus color*/
-    --c2:var(--c-white); /* background color*/
-  
-    display:inline-block;
-    width:var(--l);
-    height:var(--l);
-    padding:var(--s);
-    box-sizing:border-box; /*Remove this if you don't want space to be included in the size*/
 
-    background-position:center;
-    background-size: 100% var(--t),var(--t) 100%;
-    background-repeat:no-repeat;
-  }
+    --t: 1px; /* Thickness */
+    --l: 25px; /* size of the symbol */
+    --s: 8px; /* space around the symbol */
+    --c1: var(--c-black); /* Plus color*/
+    --c2: var(--c-white); /* background color*/
 
+    display: inline-block;
+    width: var(--l);
+    height: var(--l);
+    padding: var(--s);
+    box-sizing: border-box; /*Remove this if you don't want space to be included in the size*/
+
+    background-position: center;
+    background-size: 100% var(--t), var(--t) 100%;
+    background-repeat: no-repeat;
+}
 
 .countItems {
     grid-area: 1 / 2 / span 3 / span 1;

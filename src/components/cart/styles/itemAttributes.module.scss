@@ -1,0 +1,29 @@
+.attributes {
+    font-size: 0.875em;
+    line-height: 1.6em;
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+.attributeSet {
+    display: flex;
+    margin-top: 0.5rem;
+}
+
+.attributesButton {
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    margin-right: 0.5rem;
+    border: 1px solid var(--c-black);
+    cursor: default;
+}
+
+.selectedButton {
+    color: var(--c-light-gray);
+    background-color: var(--c-light-gray-transparent);
+    border: 1px solid var(--c-light-gray);
+}
+
+.swatchAttribute.selectedButton {
+    padding: 1px;
+    border: 2px solid var(--c-black);
+}

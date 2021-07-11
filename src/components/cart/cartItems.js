@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./styles/cartItems.module.scss";
 import convertToSymbol from "../../util/currencyConverter";
 import { productPriceSelector } from "../../store/selectors";
+import ItemAttributes from "./itemAttributes";
 
 class CartItems extends React.Component {
     addToCartClicked = (cartItem) => {
@@ -31,12 +32,7 @@ class CartItems extends React.Component {
                                 </div>
                             </div>
                             <div className={styles.attributes}>
-                                <button className={styles.attributesButton}>
-                                    XS
-                                </button>
-                                <button className={styles.attributesButton}>
-                                    M
-                                </button>
+                                <ItemAttributes cartItem={cartItem} />
                             </div>
                             <button
                                 className={`${styles.addItem} ${styles.button}`}
