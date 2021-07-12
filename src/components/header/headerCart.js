@@ -1,12 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./styles/headerCart.module.scss";
 import convertToSymbol from "../../util/currencyConverter";
 import { computeCartTotal } from "../../util/cartItemUtil";
 import { ReactComponent as HeaderCartLogo } from "../../images/emptyCart.svg";
 
 class HeaderCart extends React.Component {
-    minicartClicked = (e) => {
+    minicartClicked = () => {
         this.props.setMinicartState(!this.props.isMinicartOpen);
+    };
+    viewCartClicked = () => {
+        this.props.setMinicartState(false);
     };
     render() {
         let { cartItems: CartItems } = this.props;
@@ -45,9 +49,14 @@ class HeaderCart extends React.Component {
                             </span>
                         </div>
                         <div className={styles.buttonsContainer}>
-                            <button className={styles.viewButton}>
-                                VIEW BAG
-                            </button>
+                            <Link to="/cart">
+                                <button
+                                    className={styles.viewButton}
+                                    onClick={this.viewCartClicked}
+                                >
+                                    VIEW BAG
+                                </button>
+                            </Link>
                             <button className={styles.checkOutButton}>
                                 CHECK OUT
                             </button>

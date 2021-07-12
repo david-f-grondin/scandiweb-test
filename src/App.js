@@ -2,13 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import "./App.scss";
 import Header from "./containers/header/header";
-import Plp from "./containers/plp/plp";
+import Main from "./containers/main";
 import { initAPI, getAllCurrenciesAPI, getAllProductsAPI } from "./util/api.js";
-import { minicartStateSelector } from "./store/selectors";
 import { setAllCategories } from "./slices/categories";
 import { setAllCurrencies } from "./slices/currencies";
 import { setAllProducts } from "./slices/products";
-import { setMinicartState } from "./slices/states";
 
 class App extends React.Component {
     async componentDidMount() {
@@ -24,23 +22,11 @@ class App extends React.Component {
         return (
             <div className="App">
                 <Header />
-                <Plp />
-                {this.props.isMinicartOpen ? (
-                    <div
-                        className="overlay"
-                        onClick={() => {
-                            this.props.setMinicartState(false);
-                        }}
-                    />
-                ) : null}
+                <Main />
             </div>
         );
     }
 }
-
-const mapStateToProps = (state, ownProps) => ({
-    isMinicartOpen: minicartStateSelector(state),
-});
 
 const mapDispatchToProps = (dispatch) => ({
     setAllCategories: (payload) => {
@@ -52,9 +38,6 @@ const mapDispatchToProps = (dispatch) => ({
     setAllProducts: (payload) => {
         dispatch(setAllProducts(payload));
     },
-    setMinicartState: (payload) => {
-        dispatch(setMinicartState(payload));
-    },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);

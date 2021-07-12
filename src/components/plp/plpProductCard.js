@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./styles/plpProductCard.module.scss";
 import cartLogo from "../../images/emptyCart.svg";
 import convertToSymbol from "../../util/currencyConverter";
@@ -20,23 +21,31 @@ class PlpProductCard extends React.Component {
         return (
             <div className={styles.productsCard}>
                 <div className={styles.productImageContainer}>
-                    <img
-                        className={styles.productImage}
-                        src={this.props.product.gallery[0]}
-                        alt=""
-                    />
+                    <Link to={"/product/" + this.props.product.id}>
+                        <img
+                            className={styles.productImage}
+                            src={this.props.product.gallery[0]}
+                            alt=""
+                        />
+                    </Link>
+                    <button
+                        className={styles.circle}
+                        onClick={() =>
+                            this.addToCartClicked(this.props.product)
+                        }
+                    >
+                        <img src={cartLogo} alt="" />
+                    </button>
                 </div>
-                <button
-                    className={styles.circle}
-                    onClick={() => this.addToCartClicked(this.props.product)}
-                >
-                    <img src={cartLogo} alt="" />
-                </button>
                 <div className={styles.productTitle}>
-                    {this.props.product.name}
+                    <Link to={"/product/" + this.props.product.id}>
+                        {this.props.product.name}
+                    </Link>
                 </div>
                 <div className={styles.price}>
-                    {convertToSymbol(price.currency) + price.amount}
+                    <Link to={"/product/" + this.props.product.id}>
+                        {convertToSymbol(price.currency) + price.amount}
+                    </Link>
                 </div>
             </div>
         );

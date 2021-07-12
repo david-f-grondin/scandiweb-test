@@ -104,17 +104,14 @@ html {
     overflow-y: overlay;
 }
 
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
 .App {
-    position: relative;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     font-family: "Raleway", sans-serif;
-}
-
-.overlay {
-    position: absolute;
-    background-color: var(--c-gray-overlay);
-    height: 100%;
-    width: 100%;
 }

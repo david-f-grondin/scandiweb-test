@@ -21,6 +21,8 @@ export const selectedCurrencySelector = ({ currencies }) =>
     currencies.selectedCurrency;
 
 // Cart
+export const cartItemSelector = ({ products }, productId) =>
+    products.products.find((product) => (product.id = productId));
 export const cartItemsSelector = ({ cart }) => cart.items;
 export const selectedItemSelector = ({ cart }) => cart.selectedItem;
 

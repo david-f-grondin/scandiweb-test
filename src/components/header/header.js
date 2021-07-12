@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./styles/header.module.scss";
 import { ReactComponent as HeaderLogo } from "../../images/a-logo.svg";
 
@@ -11,7 +12,11 @@ class Header extends React.Component {
         return (
             <div className={styles.header}>
                 <HeaderNavigation />
-                <HeaderLogo className={styles.headerLogo} />
+                <Link to="/">
+                    <button className={styles.headerLogoButton}>
+                        <HeaderLogo />
+                    </button>
+                </Link>
                 <HeaderActions />
             </div>
         );
