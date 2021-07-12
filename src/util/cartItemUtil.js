@@ -10,15 +10,9 @@ export const isSameItem = (item1, item2) => {
     }
 };
 
-// Check if a cart item is present in a cart item array
-export const isItemInCart = (item, items) => {
-    return items.some((elem, index) => {
-        if (isSameItem(elem, item)) {
-            items[index].count += 1;
-            return true;
-        }
-        return false;
-    });
+// Check if a cart item is present in a cart item array and return its index or -1
+export const indexOfItemInCart = (item, items) => {
+    return items.findIndex((elem, index) => isSameItem(elem, item));
 };
 
 // Create a cart item from a product with count of 1 and default attributes

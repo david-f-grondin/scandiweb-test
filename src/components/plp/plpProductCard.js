@@ -4,15 +4,8 @@ import styles from "./styles/plpProductCard.module.scss";
 import cartLogo from "../../images/emptyCart.svg";
 import convertToSymbol from "../../util/currencyConverter";
 import { productPriceSelector } from "../../store/selectors";
-import { productToItem } from "../../util/cartItemUtil";
 
 class PlpProductCard extends React.Component {
-    addToCartClicked = (product) => {
-        const item = productToItem(product);
-        this.props.selectCartItem(item);
-        this.props.addItem(item);
-    };
-
     render() {
         let price = productPriceSelector(
             this.props.product,
@@ -27,12 +20,7 @@ class PlpProductCard extends React.Component {
                             src={this.props.product.gallery[0]}
                             alt=""
                         />
-                        <button
-                            className={styles.circle}
-                            onClick={() =>
-                                this.addToCartClicked(this.props.product)
-                            } /*Should not add to cart, but redirect to pdp */
-                        >
+                        <button className={styles.circle}>
                             <img src={cartLogo} alt="" />
                         </button>
                     </Link>

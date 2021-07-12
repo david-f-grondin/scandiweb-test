@@ -11,6 +11,14 @@ export const getAllCurrenciesAPI = async () => {
     return response.currencies;
 };
 
+export const getAllCategoriesAPI = async () => {
+    const query = new Query("category", false)
+        .addField(new Field("name"))
+        .addField(new Field("products", true).addField(new Field("category")));
+    let response = await makeQuery(query);
+    return categoriesApiToCategories(response.category.products);
+};
+
 export const getAllProductsAPI = async () => {
     const productsFields = ["id", "name", "inStock", "description", "category"];
     const priceFields = ["currency", "amount"];
@@ -34,7 +42,10 @@ export const getAllProductsAPI = async () => {
                 )
         );
     let response = await makeQuery(query);
-    return response.category.products;
+    response = response.category.products.map((productApi) => {
+        return productApiToProduct(productApi);
+    });
+    return response;
 };
 
 const makeQuery = async (query) => {
@@ -47,4 +58,33 @@ const makeQuery = async (query) => {
     } catch (error) {
         console.log(error);
     }
+};
+
+// Create an array of categories from a response of categoriesApi
+export const categoriesApiToCategories = (categoriesApi) => {
+    let categories = [];
+    categoriesApi.forEach((categoryApi) => {
+        let category = categoryApi.category;
+        if (!categories.includes(category)) categories.push(category);
+    });
+    return categories;
+};
+
+// Create a product from a productApi with default attributes
+export const productApiToProduct = (product) => {
+    let newProductAttributes = product.attributes.map((attribute) => {
+        let attributeItem = attribute.items.map((item, index) => {
+            let selectedValue = false;
+            if (index === 0) {
+                selectedValue = true;
+            }
+            return { ...item, selected: selectedValue };
+        });
+        return { ...attribute, items: attributeItem };
+    });
+    const newProduct = {
+        ...product,
+        attributes: newProductAttributes,
+    };
+    return newProduct;
 };

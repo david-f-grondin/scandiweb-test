@@ -1,9 +1,21 @@
 import { connect } from "react-redux";
-import Pdp from "../../components/plp/plp";
-import { cartItemSelector } from "../../store/selectors";
+import { bindActionCreators } from "redux";
+import Pdp from "../../components/pdp/pdp";
+import { addItem } from "../../slices/cart";
+import {
+    cartItemSelector,
+    selectedCurrencySelector,
+} from "../../store/selectors";
 
 const mapStateToProps = (state, ownProps) => ({
-    cartItem: cartItemSelector(state, ownProps.match.params.productId),
+    product: cartItemSelector(state, ownProps.match.params.productId),
+    selectedCurrency: selectedCurrencySelector(state),
 });
 
-export default connect(mapStateToProps)(Pdp);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addItem: bindActionCreators(addItem, dispatch),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Pdp);

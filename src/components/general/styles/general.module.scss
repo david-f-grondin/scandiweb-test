@@ -1,0 +1,25 @@
+.product__title {
+    font-size: 1.875rem;
+    line-height: 0.9em;
+}
+
+.product__titleBrand {
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.product__titleName {
+    font-weight: 400;
+}
+
+.price {
+    font-size: 1.5rem;
+    line-height: 0.75em;
+    font-weight: 700;
+}
+
+.button--green {
+    font-weight: 600;
+    color: var(--c-white);
+    background-color: var(--c-primary);
+}

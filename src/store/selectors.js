@@ -5,12 +5,14 @@ export const selectedCategorySelector = ({ categories }) =>
 
 // Products
 export const productNameSelector = (product) => product.name;
-export const productsSelector = ({ products }) => products.products;
+export const productsSelector = ({ products }) => products;
 export const productsByCategorySelector = ({ products }, category) =>
-    products.products.filter((product) => product.category === category);
+    products.filter((product) => product.category === category);
 export const productsCurrentCategorySelector = ({ products, categories }) =>
-    products.products.filter(
-        (product) => product.category === categories.selectedCategory
+    products.filter(
+        (product) =>
+            product.category === categories.selectedCategory ||
+            categories.selectedCategory === "all"
     );
 export const productPriceSelector = (product, currency) =>
     product.prices.find((price) => price.currency === currency);
@@ -22,9 +24,8 @@ export const selectedCurrencySelector = ({ currencies }) =>
 
 // Cart
 export const cartItemSelector = ({ products }, productId) =>
-    products.products.find((product) => (product.id = productId));
-export const cartItemsSelector = ({ cart }) => cart.items;
-export const selectedItemSelector = ({ cart }) => cart.selectedItem;
+    products.find((product) => product.id === productId);
+export const cartItemsSelector = ({ cart }) => cart;
 
 // States
 export const currencySwitcherStateSelector = ({ states }) =>

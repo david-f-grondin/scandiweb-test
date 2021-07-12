@@ -12,19 +12,16 @@ export const categoriesSlice = createSlice({
         selectCategory: (state, action) => {
             state.selectedCategory = action.payload;
         },
-        // Get all existing categories from a list of products
+        // Set all categories from an array and add the category 'all'
         setAllCategories: (state, action) => {
-            let categories = [];
-            let products = action.payload;
-            products.forEach((product) => {
-                let category = product.category;
-                if (!categories.includes(category)) categories.push(category);
-            });
+            let categories = action.payload;
+            if (categories !== undefined && !categories.includes("all")) {
+                categories.unshift("all");
+            } else {
+                categories = ["all"];
+            }
+            state.selectedCategory = categories[0];
             state.categories = categories;
-            state.selectedCategory =
-                categories === undefined || categories.length === 0
-                    ? ""
-                    : categories[0];
         },
     },
 });

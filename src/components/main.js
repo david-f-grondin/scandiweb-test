@@ -21,7 +21,7 @@ class Main extends React.Component {
                 <Switch>
                     <Route exact path="/" component={Plp}></Route>
                     <Route path="/cart" component={Cart}></Route>
-                    <Route path="/products/:productId" component={Pdp}></Route>
+                    <Route path="/product/:productId" component={Pdp}></Route>
                 </Switch>
                 {this.props.isMinicartOpen ? (
                     <div

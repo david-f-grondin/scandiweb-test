@@ -91,7 +91,6 @@
 }
 
 .checkOutButton {
+    composes: button--green from "../../general/styles/general.module.scss";
     padding: 0.929em 1.844rem;
-    color: var(--c-white);
-    background-color: var(--c-primary);
 }
