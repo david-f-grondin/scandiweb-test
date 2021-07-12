@@ -9,6 +9,7 @@ class HeaderCurrency extends React.Component {
     };
     currencyOptionClicked = (currency) => {
         this.props.selectCurrency(currency);
+        this.props.setCurrencySwitcherState(false);
     };
     render() {
         return (

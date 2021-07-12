@@ -8,6 +8,7 @@ import { minicartStateSelector } from "./store/selectors";
 import { setAllCategories } from "./slices/categories";
 import { setAllCurrencies } from "./slices/currencies";
 import { setAllProducts } from "./slices/products";
+import { setMinicartState } from "./slices/states";
 
 class App extends React.Component {
     async componentDidMount() {
@@ -24,7 +25,14 @@ class App extends React.Component {
             <div className="App">
                 <Header />
                 <Plp />
-                {this.props.isMinicartOpen ? <div className="overlay" /> : null}
+                {this.props.isMinicartOpen ? (
+                    <div
+                        className="overlay"
+                        onClick={() => {
+                            this.props.setMinicartState(false);
+                        }}
+                    />
+                ) : null}
             </div>
         );
     }
@@ -43,6 +51,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     setAllProducts: (payload) => {
         dispatch(setAllProducts(payload));
+    },
+    setMinicartState: (payload) => {
+        dispatch(setMinicartState(payload));
     },
 });
 

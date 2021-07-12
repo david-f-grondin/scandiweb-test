@@ -16,7 +16,7 @@
 
 .arrowUp {
     $angle: 180deg;
-    -webkit-transform:rotate($angle);
+    -webkit-transform: rotate($angle);
     -moz-transform: rotate($angle);
     -ms-transform: rotate($angle);
     -o-transform: rotate($angle);
@@ -41,4 +41,7 @@
     font-weight: 500;
     line-height: 1.6em;
     white-space: nowrap;
+    &:hover {
+        background-color: var(--c-light-gray-transparent);
+    }
 }
