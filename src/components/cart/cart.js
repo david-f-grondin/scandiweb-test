@@ -6,7 +6,8 @@ class Cart extends React.Component {
         let { cartItems: CartItems } = this.props;
         return (
             <div className={styles.cartContainer}>
-                <CartItems />
+                <div className={styles.cartTitle}>CART</div>
+                <CartItems styleMod="2" />
             </div>
         );
     }

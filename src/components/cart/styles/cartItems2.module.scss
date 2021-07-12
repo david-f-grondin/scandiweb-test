@@ -1,0 +1,46 @@
+// Style for cartItems in cart page
+.item {
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--c-light-gray2);
+}
+
+.namePrice {
+    font-size: 1.875rem;
+    line-height: 0.9em;
+}
+
+.brand {
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.name {
+    font-weight: 400;
+}
+
+.price {
+    padding: 1.625rem 0;
+    font-size: 1.5rem;
+    line-height: 0.75em;
+    font-weight: 700;
+}
+
+.button {
+    --t: 1px; /* Thickness */
+    --l: 45px; /* size of the symbol */
+    --s: 15px; /* space around the symbol */
+    --c1: var(--c-black); /* Plus color*/
+    --c2: var(--c-white); /* background color*/
+}
+
+.countItems {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.6rem;
+}
+
+.image {
+    width: 8.813rem;
+    min-height: 11.563rem;
+    margin-left: 0.75rem;
+}

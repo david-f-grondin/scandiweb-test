@@ -37,7 +37,7 @@ class HeaderCart extends React.Component {
                             </span>
                             <span> {this.props.cart.length} items</span>
                         </div>
-                        <CartItems />
+                        <CartItems styleMod="1" />
                         <div className={styles.total}>
                             <span className={styles.totalText}>Total</span>
                             <span className={styles.totalValue}>

@@ -27,15 +27,15 @@ class PlpProductCard extends React.Component {
                             src={this.props.product.gallery[0]}
                             alt=""
                         />
+                        <button
+                            className={styles.circle}
+                            onClick={() =>
+                                this.addToCartClicked(this.props.product)
+                            } /*Should not add to cart, but redirect to pdp */
+                        >
+                            <img src={cartLogo} alt="" />
+                        </button>
                     </Link>
-                    <button
-                        className={styles.circle}
-                        onClick={() =>
-                            this.addToCartClicked(this.props.product)
-                        }
-                    >
-                        <img src={cartLogo} alt="" />
-                    </button>
                 </div>
                 <div className={styles.productTitle}>
                     <Link to={"/product/" + this.props.product.id}>

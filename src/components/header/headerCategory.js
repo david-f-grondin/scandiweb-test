@@ -11,7 +11,7 @@ class HeaderCategory extends React.Component {
         }`;
         return (
             <button className={classes} onClick={this.handleClick}>
-                <span>{this.props.category}</span>
+                <span>{this.props.category.toUpperCase()}</span>
             </button>
         );
     }
