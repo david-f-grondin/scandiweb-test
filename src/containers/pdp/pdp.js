@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Pdp from "../../components/pdp/pdp";
 import { addItem } from "../../slices/cart";
+import { setAllProducts } from "../../slices/products";
 import {
     cartItemSelector,
     selectedCurrencySelector,
@@ -15,6 +16,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         addItem: bindActionCreators(addItem, dispatch),
+        setAllProducts: bindActionCreators(setAllProducts, dispatch),
     };
 };
 

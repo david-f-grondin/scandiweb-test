@@ -5,6 +5,7 @@ import style2 from "./styles/cartItems2.module.scss";
 import convertToSymbol from "../../util/currencyConverter";
 import { productPriceSelector } from "../../store/selectors";
 import ItemAttributes from "./itemAttributes";
+import ImageCarousel from "./imageCarousel";
 
 class CartItems extends React.Component {
     addToCartClicked = (cartItem) => {
@@ -76,8 +77,10 @@ class CartItems extends React.Component {
                             <div
                                 className={`${baseStyle.image} ${styleMod.image}`}
                             >
-                                <div className={baseStyle.helperImage} />
-                                <img src={cartItem.gallery[0]} alt="" />
+                                <ImageCarousel
+                                    images={cartItem.gallery}
+                                    isNavigable={this.props.styleMod === "2"}
+                                />
                             </div>
                         </div>
                     );

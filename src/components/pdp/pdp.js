@@ -3,12 +3,31 @@ import parse from "html-react-parser";
 import styles from "./styles/pdp.module.scss";
 import convertToSymbol from "../../util/currencyConverter";
 import { productPriceSelector } from "../../store/selectors";
+import { initAPI, getAllProductsAPI } from "../../util/api";
 
 class Pdp extends React.Component {
+    componentDidMount() {
+        if (typeof this.props.product === "undefined") {
+            initAPI();
+            getAllProductsAPI(this.props.match.params.productId).then(
+                (product) => {
+                    this.props.setAllProducts(product);
+                }
+            );
+        }
+    }
+
     addToCartClicked = (product) => {
         this.props.addItem(product);
     };
     render() {
+        if (typeof this.props.product === "undefined") {
+            return (
+                <div>
+                    <h1>Sorry, this product is not available.</h1>
+                </div>
+            );
+        }
         const price = productPriceSelector(
             this.props.product,
             this.props.selectedCurrency

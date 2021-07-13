@@ -1,17 +1,19 @@
 import { client, Query, Field } from "@tilework/opus";
 const settings = require("./settings.json");
 
-export const initAPI = () => {
+export function initAPI() {
     client.setEndpoint(settings.api_endpoint);
-};
+}
 
 export const getAllCurrenciesAPI = async () => {
+    console.log("getAllCurrenciesAPI");
     const query = new Query("currencies", true);
     let response = await makeQuery(query);
     return response.currencies;
 };
 
 export const getAllCategoriesAPI = async () => {
+    console.log("getAllCategoriesAPI");
     const query = new Query("category", false)
         .addField(new Field("name"))
         .addField(new Field("products", true).addField(new Field("category")));
@@ -20,6 +22,7 @@ export const getAllCategoriesAPI = async () => {
 };
 
 export const getAllProductsAPI = async () => {
+    console.log("getAllProductsAPI");
     const productsFields = ["id", "name", "inStock", "description", "category"];
     const priceFields = ["currency", "amount"];
     const attributeSetFields = ["id", "name", "type"];

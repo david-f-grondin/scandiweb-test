@@ -16,7 +16,7 @@ export const categoriesSlice = createSlice({
         setAllCategories: (state, action) => {
             let categories = action.payload;
             if (categories !== undefined && !categories.includes("all")) {
-                categories.unshift("all");
+                categories.push("all");
             } else {
                 categories = ["all"];
             }

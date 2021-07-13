@@ -1,0 +1,49 @@
+.imageCarousel {
+    position: relative;
+    height: 100%;
+}
+
+.image {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    object-fit: cover;
+}
+
+.helperImage {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.buttons {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+}
+
+.previousButton {
+    @extend .buttons;
+    left: 0;
+}
+
+.nextButton {
+    @extend .buttons;
+    right: 0;
+}
+
+.previousArrow {
+    margin-left: 0.563rem;
+}
+
+.nextArrow {
+    margin-left: auto;
+    margin-right: 0.563rem;
+    $angle: 180deg;
+    -webkit-transform: rotate($angle);
+    -moz-transform: rotate($angle);
+    -ms-transform: rotate($angle);
+    -o-transform: rotate($angle);
+    transform: rotate($angle);
+}
