@@ -6,6 +6,11 @@ import { productPriceSelector } from "../../store/selectors";
 import { initAPI, getAllProductsAPI } from "../../util/api";
 
 class Pdp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { imageDisplayed: this.props.product.gallery[0] };
+    }
+
     componentDidMount() {
         if (typeof this.props.product === "undefined") {
             initAPI();
@@ -17,6 +22,9 @@ class Pdp extends React.Component {
         }
     }
 
+    imagePicked = (image) => {
+        this.setState({ imageDisplayed: image });
+    };
     addToCartClicked = (product) => {
         this.props.addItem(product);
     };
@@ -34,9 +42,20 @@ class Pdp extends React.Component {
         );
         return (
             <div className={styles.pdpContainer}>
-                <div className={styles.imagePicker}></div>
+                <div className={styles.imagePicker}>
+                    {this.props.product.gallery.map((image, index) => {
+                        return (
+                            <button
+                                key={index}
+                                onClick={() => this.imagePicked(image)}
+                            >
+                                <img src={image} alt=""></img>
+                            </button>
+                        );
+                    })}
+                </div>
                 <div className={styles.mainImageContainer}>
-                    <img src={this.props.product.gallery[0]} alt=""></img>
+                    <img src={this.state.imageDisplayed} alt=""></img>
                 </div>
                 <div className={styles.productInfoContainer}>
                     <div className={styles.productTitle}>

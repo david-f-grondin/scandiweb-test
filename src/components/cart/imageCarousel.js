@@ -27,7 +27,7 @@ class ImageCarousel extends React.Component {
                     alt=""
                 ></img>
 
-                {this.props.isNavigable ? (
+                {this.props.isNavigable && this.props.images.length > 1 ? (
                     <button
                         className={styles.previousButton}
                         onClick={this.previousImgClicked}
@@ -35,10 +35,11 @@ class ImageCarousel extends React.Component {
                         <img
                             className={styles.previousArrow}
                             src={arrowCarousel}
+                            alt=""
                         ></img>
                     </button>
                 ) : null}
-                {this.props.isNavigable ? (
+                {this.props.isNavigable && this.props.images.length > 1 ? (
                     <button
                         className={styles.nextButton}
                         onClick={this.nextImgClicked}
@@ -46,6 +47,7 @@ class ImageCarousel extends React.Component {
                         <img
                             className={styles.nextArrow}
                             src={arrowCarousel}
+                            alt=""
                         ></img>
                     </button>
                 ) : null}
