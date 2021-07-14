@@ -1,12 +1,15 @@
-.attributes {
+.attributeSets {
     font-size: 0.875em;
     line-height: 1.6em;
     font-family: "Source Sans Pro", sans-serif;
 }
 
 .attributeSet {
-    display: flex;
     margin-top: 0.5rem;
+}
+
+.attributeSetItems {
+    display: flex;
 }
 
 .attributesButton {
@@ -21,6 +24,10 @@
     color: var(--c-light-gray);
     background-color: var(--c-light-gray-transparent);
     border: 1px solid var(--c-light-gray);
+}
+
+.textAttribute > * {
+    margin: 0 0.125rem;
 }
 
 .swatchAttribute.selectedButton {

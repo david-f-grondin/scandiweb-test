@@ -31,9 +31,7 @@ class PlpProductCard extends React.Component {
                     </Link>
                 </div>
                 <div className={styles.price}>
-                    <Link to={"/product/" + this.props.product.id}>
-                        {convertToSymbol(price.currency) + price.amount}
-                    </Link>
+                    {convertToSymbol(price.currency) + price.amount.toFixed(2)}
                 </div>
             </div>
         );

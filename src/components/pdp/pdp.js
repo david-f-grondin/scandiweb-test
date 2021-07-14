@@ -4,11 +4,12 @@ import styles from "./styles/pdp.module.scss";
 import convertToSymbol from "../../util/currencyConverter";
 import { productPriceSelector } from "../../store/selectors";
 import { initAPI, getAllProductsAPI } from "../../util/api";
+import AttributesPicker from "../general/attributesPicker";
 
 class Pdp extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { imageDisplayed: this.props.product.gallery[0] };
+        this.state = { imageDisplayed: 0 };
     }
 
     componentDidMount() {
@@ -22,8 +23,8 @@ class Pdp extends React.Component {
         }
     }
 
-    imagePicked = (image) => {
-        this.setState({ imageDisplayed: image });
+    imagePicked = (index) => {
+        this.setState({ imageDisplayed: index });
     };
     addToCartClicked = (product) => {
         this.props.addItem(product);
@@ -47,7 +48,7 @@ class Pdp extends React.Component {
                         return (
                             <button
                                 key={index}
-                                onClick={() => this.imagePicked(image)}
+                                onClick={() => this.imagePicked(index)}
                             >
                                 <img src={image} alt=""></img>
                             </button>
@@ -55,7 +56,14 @@ class Pdp extends React.Component {
                     })}
                 </div>
                 <div className={styles.mainImageContainer}>
-                    <img src={this.state.imageDisplayed} alt=""></img>
+                    <img
+                        src={
+                            this.props.product.gallery[
+                                this.state.imageDisplayed
+                            ]
+                        }
+                        alt=""
+                    ></img>
                 </div>
                 <div className={styles.productInfoContainer}>
                     <div className={styles.productTitle}>
@@ -64,6 +72,11 @@ class Pdp extends React.Component {
                             {this.props.product.name}
                         </div>
                     </div>
+                    <AttributesPicker
+                        styleMod="2"
+                        product={this.props.product}
+                        selectAttribute={this.props.selectAttribute}
+                    />
                     <div className={styles.priceHeader}>PRICE:</div>
                     <div className={styles.price}>
                         {convertToSymbol(price.currency) + price.amount}

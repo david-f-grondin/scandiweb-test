@@ -14,6 +14,9 @@ class HeaderCart extends React.Component {
     };
     render() {
         let { cartItems: CartItems } = this.props;
+        const filterAttributes = ["With USB 3 ports", "Touch ID in keyboard"];
+        const filterAttributesHeader = ["Size", "Color", "Capacity"];
+
         return (
             <div className={styles.cartContainer}>
                 <button
@@ -37,7 +40,11 @@ class HeaderCart extends React.Component {
                             </span>
                             <span> {this.props.cart.length} items</span>
                         </div>
-                        <CartItems styleMod="1" />
+                        <CartItems
+                            styleMod="1"
+                            filterAttributes={filterAttributes}
+                            filterAttributesHeader={filterAttributesHeader}
+                        />
                         <div className={styles.total}>
                             <span className={styles.totalText}>Total</span>
                             <span className={styles.totalValue}>

@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import baseStyle from "./styles/cartItems.module.scss";
 import style1 from "./styles/cartItems1.module.scss";
 import style2 from "./styles/cartItems2.module.scss";
 import convertToSymbol from "../../util/currencyConverter";
 import { productPriceSelector } from "../../store/selectors";
-import ItemAttributes from "./itemAttributes";
 import ImageCarousel from "./imageCarousel";
+import AttributesPicker from "../general/attributesPicker";
 
 class CartItems extends React.Component {
     addToCartClicked = (cartItem) => {
@@ -44,22 +45,38 @@ class CartItems extends React.Component {
                                 <div
                                     className={`${baseStyle.brand} ${styleMod.brand}`}
                                 >
-                                    Apollo
+                                    <Link to={"/product/" + cartItem.id}>
+                                        Apollo
+                                    </Link>
                                 </div>
                                 <div
                                     className={`${baseStyle.name} ${styleMod.name}`}
                                 >
-                                    {cartItem.name}
+                                    <Link to={"/product/" + cartItem.id}>
+                                        {cartItem.name}
+                                    </Link>
                                 </div>
                                 <div
                                     className={`${baseStyle.price} ${styleMod.price}`}
                                 >
                                     {convertToSymbol(price.currency) +
-                                        cartItem.count * price.amount}
+                                        (cartItem.count * price.amount).toFixed(
+                                            2
+                                        )}
                                 </div>
                             </div>
                             <div className={baseStyle.attributes}>
-                                <ItemAttributes cartItem={cartItem} />
+                                <AttributesPicker
+                                    product={cartItem}
+                                    styleMod={this.props.styleMod}
+                                    selectAttribute={this.props.selectAttribute}
+                                    filterAttributes={
+                                        this.props.filterAttributes
+                                    }
+                                    filterAttributesHeader={
+                                        this.props.filterAttributesHeader
+                                    }
+                                />
                             </div>
                             <button
                                 className={`${baseStyle.addItem} ${baseStyle.button} ${styleMod.button}`}
@@ -89,5 +106,11 @@ class CartItems extends React.Component {
         );
     }
 }
+
+CartItems.defaultProps = {
+    styleMod: "1",
+    filterAttributes: [],
+    filterAttributesHeader: [],
+};
 
 export default CartItems;

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { addItem, removeItem } from "../../slices/cart";
+import { addItem, removeItem, selectAttribute } from "../../slices/cart";
 import {
     cartItemsSelector,
     selectedCurrencySelector,
@@ -16,6 +16,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addItem: bindActionCreators(addItem, dispatch),
         removeItem: bindActionCreators(removeItem, dispatch),
+        selectAttribute: bindActionCreators(selectAttribute, dispatch),
     };
 };
 

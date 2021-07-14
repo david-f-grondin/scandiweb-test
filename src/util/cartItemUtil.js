@@ -1,18 +1,30 @@
 // Two items are equals if they have the same id and selected attributes
 export const isSameItem = (item1, item2) => {
     if (item1.id === item2.id) {
-        item1.attributes.forEach((attribute, index) => {
-            if (attribute.selected !== item2.attributes[index]) return false;
+        return !item1.attributes.some((attributeSet, indexSet) => {
+            return attributeSet.items.some((attribute, indexAttribute) => {
+                return (
+                    attribute.selected !==
+                    item2.attributes[indexSet].items[indexAttribute].selected
+                );
+            });
         });
-        return true;
     } else {
         return false;
     }
 };
 
 // Check if a cart item is present in a cart item array and return its index or -1
-export const indexOfItemInCart = (item, items) => {
+export const getIndexOfItemInCart = (item, items) => {
     return items.findIndex((elem, index) => isSameItem(elem, item));
+};
+
+// Return indexes of occurences of item in a cart items
+export const getIndexesOfItemInCart = (item, items) => {
+    const indexes = [];
+    for (let i = 0; i < items.length; i++)
+        if (isSameItem(items[i], item)) indexes.push(i);
+    return indexes;
 };
 
 // Create a cart item from a product with count of 1 and default attributes
@@ -56,4 +68,19 @@ export const removeItemInCart = (itemToRemove, cartItems) => {
         else cartItems[index].count--;
     }
     return cartItems;
+};
+
+// Select an attributeSet in a product
+export const selectAttributeSet = (attributeSetId, product) => {
+    return product.attributes.find(
+        (attributeSet) => attributeSet.id === attributeSetId
+    );
+};
+
+// Select an attribute in an attribute set
+export const selectAttributeInSet = (attributeId, attributeSet) => {
+    attributeSet.items.forEach((item) => {
+        item.selected = item.id === attributeId;
+    });
+    return attributeSet;
 };
