@@ -30,7 +30,12 @@ class AttributesPicker extends React.Component {
                     const isSwatch = attributeSet.type === "swatch";
                     const isText = attributeSet.type === "text";
                     if (
-                        !this.props.filterAttributes.includes(attributeSet.name)
+                        !this.props.filterAttributes.includes(
+                            attributeSet.name
+                        ) &&
+                        !this.props.filterAttributesByType.includes(
+                            attributeSet.type
+                        )
                     ) {
                         return (
                             <div
@@ -110,6 +115,7 @@ class AttributesPicker extends React.Component {
 AttributesPicker.defaultProps = {
     filterAttributes: [],
     filterAttributesHeader: [],
+    filterAttributesByType: [],
 };
 
 export default AttributesPicker;

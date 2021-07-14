@@ -5,7 +5,7 @@
     font-family: "Source Sans Pro", sans-serif;
 }
 
-.attributeSet {
+.attributeSet:not(:first-child) {
     margin-top: 0.25rem;
 }
 
@@ -16,6 +16,8 @@
 
 .attributeSetItems {
     display: flex;
+    flex-wrap: wrap;
+    row-gap: 2px;
 }
 
 .attributesButton {

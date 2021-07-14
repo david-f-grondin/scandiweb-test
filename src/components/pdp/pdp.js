@@ -5,6 +5,7 @@ import convertToSymbol from "../../util/currencyConverter";
 import { productPriceSelector } from "../../store/selectors";
 import { initAPI, getAllProductsAPI } from "../../util/api";
 import AttributesPicker from "../general/attributesPicker";
+import { canBeAddedToCart } from "../../util/cartItemUtil";
 
 class Pdp extends React.Component {
     constructor(props) {
@@ -27,7 +28,9 @@ class Pdp extends React.Component {
         this.setState({ imageDisplayed: index });
     };
     addToCartClicked = (product) => {
-        this.props.addItem(product);
+        if (canBeAddedToCart(this.props.product)) {
+            this.props.addItem(this.props.product);
+        }
     };
     render() {
         if (typeof this.props.product === "undefined") {
@@ -84,9 +87,7 @@ class Pdp extends React.Component {
                     {this.props.product.inStock ? (
                         <button
                             className={styles.addToCartButton}
-                            onClick={() =>
-                                this.addToCartClicked(this.props.product)
-                            }
+                            onClick={this.addToCartClicked}
                         >
                             ADD TO CART
                         </button>

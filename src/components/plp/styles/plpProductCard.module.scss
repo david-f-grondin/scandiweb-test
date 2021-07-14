@@ -1,6 +1,7 @@
 .productsCard {
     padding: 1rem;
     font-size: 1.125em;
+    max-width: 24.125rem;
 }
 
 .productImageContainer {
@@ -37,6 +38,17 @@
 
 .price {
     font-weight: 500;
+}
+
+.priceSwatchContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.swatchContainer {
+    margin-left: 0.5rem;
 }
 
 .productsCard:hover {
