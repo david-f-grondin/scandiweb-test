@@ -14,7 +14,7 @@ class HeaderCart extends React.Component {
     };
     render() {
         let { cartItems: CartItems } = this.props;
-        const filterAttributes = ["With USB 3 ports", "Touch ID in keyboard"];
+        const filterAttributes = [];
         const filterAttributesHeader = ["Size", "Color", "Capacity"];
 
         return (

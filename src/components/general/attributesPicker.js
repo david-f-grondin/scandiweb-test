@@ -43,7 +43,10 @@ class AttributesPicker extends React.Component {
                                     <div
                                         className={`${baseStyle.attributeSetName} ${styleMod.attributeSetName}`}
                                     >
-                                        {attributeSet.name.toUpperCase()}:
+                                        {this.props.styleMod === "1"
+                                            ? attributeSet.name
+                                            : attributeSet.name.toUpperCase()}
+                                        :
                                     </div>
                                 ) : null}
                                 <div

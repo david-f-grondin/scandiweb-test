@@ -16,13 +16,24 @@ class PlpProductCard extends React.Component {
                 <div className={styles.productImageContainer}>
                     <Link to={"/product/" + this.props.product.id}>
                         <img
-                            className={styles.productImage}
+                            className={`${styles.productImage} ${
+                                !this.props.product.inStock
+                                    ? styles.productImageOutOfStock
+                                    : ""
+                            }`}
                             src={this.props.product.gallery[0]}
                             alt=""
                         />
-                        <button className={styles.circle}>
-                            <img src={cartLogo} alt="" />
-                        </button>
+
+                        {!this.props.product.inStock ? (
+                            <span className={styles.outOfStockText}>
+                                OUT OF STOCK
+                            </span>
+                        ) : (
+                            <button className={styles.circle}>
+                                <img src={cartLogo} alt="" />
+                            </button>
+                        )}
                     </Link>
                 </div>
                 <div className={styles.productTitle}>

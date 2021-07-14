@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+    canBeAddedToCart,
     getIndexOfItemInCart,
     getIndexesOfItemInCart,
     removeItemInCart,
@@ -15,11 +16,16 @@ export const cartSlice = createSlice({
     reducers: {
         addItem: (state, action) => {
             let newItem = action.payload;
-            const itemIndex = getIndexOfItemInCart(newItem, state);
-            if (itemIndex === -1) {
-                state.push({ ...newItem, count: 1 });
+
+            if (canBeAddedToCart(newItem)) {
+                const itemIndex = getIndexOfItemInCart(newItem, state);
+                if (itemIndex === -1) {
+                    state.push({ ...newItem, count: 1 });
+                } else {
+                    state[itemIndex].count += 1;
+                }
             } else {
-                state[itemIndex].count += 1;
+                return state;
             }
         },
         removeItem: (state, action) => {

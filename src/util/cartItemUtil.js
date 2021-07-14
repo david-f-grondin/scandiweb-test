@@ -84,3 +84,22 @@ export const selectAttributeInSet = (attributeId, attributeSet) => {
     });
     return attributeSet;
 };
+
+// Check if a product can be added to cart
+export const canBeAddedToCart = (product) => {
+    return product.inStock && allAttributesSetsSelected(product);
+};
+
+// Check if a product has at least one value selected for each attribute set
+export const allAttributesSetsSelected = (product) => {
+    return !product.attributes.some((attributeSet) => {
+        return !hasAnAttributeSelected(attributeSet);
+    });
+};
+
+// Check if an attribute set have at least one attribute selected
+export const hasAnAttributeSelected = (attributeSet) => {
+    return attributeSet.items.some((attribute) => {
+        return attribute.selected;
+    });
+};

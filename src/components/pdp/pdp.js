@@ -81,14 +81,20 @@ class Pdp extends React.Component {
                     <div className={styles.price}>
                         {convertToSymbol(price.currency) + price.amount}
                     </div>
-                    <button
-                        className={styles.addToCartButton}
-                        onClick={() =>
-                            this.addToCartClicked(this.props.product)
-                        }
-                    >
-                        ADD TO CART
-                    </button>
+                    {this.props.product.inStock ? (
+                        <button
+                            className={styles.addToCartButton}
+                            onClick={() =>
+                                this.addToCartClicked(this.props.product)
+                            }
+                        >
+                            ADD TO CART
+                        </button>
+                    ) : (
+                        <button className={styles.outOfStockButton}>
+                            OUT OF STOCK
+                        </button>
+                    )}
                     <div className={styles.productDescription}>
                         {parse(this.props.product.description)}
                     </div>

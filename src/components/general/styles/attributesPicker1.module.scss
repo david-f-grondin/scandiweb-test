@@ -1,3 +1,4 @@
+/* Used in Minicart */
 .attributeSets {
     font-size: 0.875em;
     line-height: 1.6em;
@@ -5,7 +6,12 @@
 }
 
 .attributeSet {
-    margin-top: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.attributeSetName {
+    font-weight: 300;
+    line-height: 1.6em;
 }
 
 .attributeSetItems {

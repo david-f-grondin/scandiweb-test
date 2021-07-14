@@ -1,4 +1,4 @@
-// Style for cartItems in Minicart
+/* Style for cartItems in Minicart */
 .item {
     margin-bottom: 2.5rem;
 }
@@ -8,16 +8,13 @@
     line-height: 1.6em;
 }
 
-.brand {
-    margin-bottom: 0.313rem;
-}
-
 .name {
     margin-bottom: 0.313rem;
 }
 
 .price {
     font-weight: 500;
+    margin-bottom: 1.6rem;
 }
 
 .button {

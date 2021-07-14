@@ -54,6 +54,13 @@
     padding: 1rem 0;
 }
 
+.outOfStockButton {
+    @extend .addToCartButton;
+    font-weight: 600;
+    color: var(--c-white);
+    background-color: var(--c-light-gray3);
+}
+
 .productDescription {
     font-family: "Roboto", sans-serif;
     font-weight: 400;

@@ -15,6 +15,21 @@
     object-fit: cover;
 }
 
+.productImageOutOfStock {
+    opacity: 0.4;
+}
+
+.outOfStockText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.6em;
+    color: var(--c-light-gray3);
+}
+
 .productTitle {
     margin-top: 1.5rem;
     font-weight: 300;
@@ -26,6 +41,9 @@
 
 .productsCard:hover {
     box-shadow: 0px 4px 35px hsla(210, 5%, 67%, 0.19);
+    & .circle {
+        visibility: visible;
+    }
 }
 
 .circle {
@@ -36,6 +54,7 @@
     padding: 0.875rem;
     width: 3.25rem;
     height: 3.25rem;
+    visibility: hidden;
     background: var(--c-primary);
     text-align: center;
     align-content: center;
