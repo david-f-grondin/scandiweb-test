@@ -1,5 +1,5 @@
 import { client, Query, Field } from "@tilework/opus";
-const settings = require("./settings.json");
+const settings = require("../settings.json");
 
 export function initAPI() {
     client.setEndpoint(settings.api_endpoint);
@@ -43,7 +43,7 @@ export const getProductsByCategoryAPI = async (category) => {
                 )
         );
     const response = await makeQuery(query);
-    return response.category.products.map((productApi) => {
+    return response?.category.products.map((productApi) => {
         return productApiToProduct(productApi);
     });
 };
@@ -71,7 +71,7 @@ export const getAllProductsAPI = async () => {
                 )
         );
     const response = await makeQuery(query);
-    return response.category.products.map((productApi) => {
+    return response?.category.products.map((productApi) => {
         return productApiToProduct(productApi);
     });
 };
