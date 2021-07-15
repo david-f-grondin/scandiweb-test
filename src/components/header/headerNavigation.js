@@ -4,7 +4,7 @@ import styles from "./styles/headerNavigation.module.scss";
 
 class HeaderNavigation extends React.Component {
     render() {
-        let { headerCategory: HeaderCategory } = this.props;
+        const { headerCategory: HeaderCategory } = this.props;
         return (
             <div className={styles.headerNavigation}>
                 <Link to="/">

@@ -11,17 +11,16 @@ class PlpProductCard extends React.Component {
     cartButtonClicked = () => {
         if (canBeAddedToCart(this.props.product)) {
             this.props.addItem(this.props.product);
+            this.props.history.push("/cart");
         } else {
             this.props.history.push("/product/" + this.props.product.id);
         }
     };
     render() {
-        let price = productPriceSelector(
+        const price = productPriceSelector(
             this.props.product,
             this.props.selectedCurrency
         );
-        const filterAttributesByType = ["text"];
-        const filterAttributesHeader = ["Color"];
         return (
             <div className={styles.productsCard}>
                 <div className={styles.productImageContainer}>
@@ -51,7 +50,10 @@ class PlpProductCard extends React.Component {
                     )}
                 </div>
                 <div className={styles.productTitle}>
-                    <Link to={"/product/" + this.props.product.id}>
+                    <Link
+                        to={"/product/" + this.props.product.id}
+                        className={styles.link}
+                    >
                         {this.props.product.brand +
                             " " +
                             this.props.product.name}
@@ -76,5 +78,8 @@ class PlpProductCard extends React.Component {
         );
     }
 }
+
+const filterAttributesByType = ["text"];
+const filterAttributesHeader = ["Color"];
 
 export default withRouter(PlpProductCard);

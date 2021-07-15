@@ -14,20 +14,24 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addItem: (state, action) => {
-            let newItem = action.payload;
+            const newItem = action.payload;
 
             const itemIndex = getIndexOfItemInCart(newItem, state);
             if (itemIndex === -1) {
-                state.push({ ...newItem, count: 1 });
+                return [...state, { ...newItem, count: 1 }];
             } else {
-                state[itemIndex].count += 1;
+                return state.map((elem, index) =>
+                    index === itemIndex
+                        ? { ...elem, count: elem.count + 1 }
+                        : elem
+                );
             }
         },
         removeItem: (state, action) => {
             const itemToRemove = action.payload;
             return removeItemInCart(itemToRemove, state);
         },
-        // Fuse all similar cart items into one
+        // Fuse all similar cart items into one (state mutation allowed by Immer)
         selectAttribute: (state, action) => {
             const product =
                 state[getIndexOfItemInCart(action.payload.product, state)];
@@ -40,7 +44,7 @@ export const cartSlice = createSlice({
 
             const indexesOfItemInCart = getIndexesOfItemInCart(product, state);
             let numberOfSimilarItems = 0;
-            for (var i = indexesOfItemInCart.length - 1; i >= 1; i--) {
+            for (let i = indexesOfItemInCart.length - 1; i >= 1; i--) {
                 numberOfSimilarItems += state[indexesOfItemInCart[i]].count;
                 state.splice(indexesOfItemInCart[i], 1);
             }

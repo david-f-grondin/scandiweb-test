@@ -3,7 +3,7 @@ import styles from "./styles/cart.module.scss";
 
 class Cart extends React.Component {
     render() {
-        let { cartItems: CartItems } = this.props;
+        const { cartItems: CartItems } = this.props;
         const filterAttributesHeader = ["Size", "Color", "Capacity"];
 
         return (

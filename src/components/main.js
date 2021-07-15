@@ -3,19 +3,7 @@ import { Switch, Route } from "react-router-dom";
 
 class Main extends React.Component {
     render() {
-        let { plp: Plp, pdp: Pdp, cart: Cart } = this.props;
-        const overlayStyle = {
-            position: "absolute",
-            backgroundColor: "var(--c-gray-overlay)",
-            top: 0,
-            left: 0,
-            height: "100%",
-            width: "100%",
-        };
-        const mainContainerStyle = {
-            position: "relative",
-            flexGrow: 1,
-        };
+        const { plp: Plp, pdp: Pdp, cart: Cart } = this.props;
         return (
             <div style={mainContainerStyle}>
                 <Switch>
@@ -35,5 +23,18 @@ class Main extends React.Component {
         );
     }
 }
+
+const overlayStyle = {
+    position: "absolute",
+    backgroundColor: "var(--c-gray-overlay)",
+    top: 0,
+    left: 0,
+    height: "100%",
+    width: "100%",
+};
+const mainContainerStyle = {
+    position: "relative",
+    flexGrow: 1,
+};
 
 export default Main;

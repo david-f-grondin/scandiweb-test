@@ -17,11 +17,13 @@ class HeaderCategory extends React.Component {
         }
     };
     render() {
-        const classes = `${styles.category} ${
-            this.props.selected ? styles.selected : ""
-        }`;
         return (
-            <button className={classes} onClick={this.handleClick}>
+            <button
+                className={`${styles.category} ${
+                    this.props.selected ? styles.selected : ""
+                }`}
+                onClick={this.handleClick}
+            >
                 <span>{this.props.category.toUpperCase()}</span>
             </button>
         );

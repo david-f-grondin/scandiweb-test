@@ -5,7 +5,7 @@ import { ReactComponent as HeaderLogo } from "../../images/a-logo.svg";
 
 class Header extends React.Component {
     render() {
-        let {
+        const {
             headerNavigation: HeaderNavigation,
             headerActions: HeaderActions,
         } = this.props;

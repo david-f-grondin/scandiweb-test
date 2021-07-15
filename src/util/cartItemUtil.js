@@ -27,26 +27,6 @@ export const getIndexesOfItemInCart = (item, items) => {
     return indexes;
 };
 
-// Create a cart item from a product with count of 1 and default attributes
-export const productToItem = (product) => {
-    let newItemAttributes = product.attributes.map((attribute) => {
-        let attributeItem = attribute.items.map((item, index) => {
-            let selectedValue = false;
-            if (index === 0) {
-                selectedValue = true;
-            }
-            return { ...item, selected: selectedValue };
-        });
-        return { ...attribute, items: attributeItem };
-    });
-    const newItem = {
-        ...product,
-        count: 1,
-        attributes: newItemAttributes,
-    };
-    return newItem;
-};
-
 // Compute the total price of the cart for a given currency
 export const computeCartTotal = (cartItems, currency) => {
     let totalPrice = 0;
@@ -60,7 +40,7 @@ export const computeCartTotal = (cartItems, currency) => {
 
 // Remove one cartItem from cart items array and return the new array
 export const removeItemInCart = (itemToRemove, cartItems) => {
-    let index = cartItems.findIndex((cartItem) => {
+    const index = cartItems.findIndex((cartItem) => {
         return isSameItem(itemToRemove, cartItem);
     });
     if (index > -1) {

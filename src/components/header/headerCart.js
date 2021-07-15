@@ -13,9 +13,7 @@ class HeaderCart extends React.Component {
         this.props.setMinicartState(false);
     };
     render() {
-        let { cartItems: CartItems } = this.props;
-        const filterAttributes = [];
-        const filterAttributesHeader = ["Size", "Color", "Capacity"];
+        const { cartItems: CartItems } = this.props;
 
         return (
             <div className={styles.cartContainer}>
@@ -74,5 +72,8 @@ class HeaderCart extends React.Component {
         );
     }
 }
+
+const filterAttributes = [];
+const filterAttributesHeader = ["Size", "Color", "Capacity"];
 
 export default HeaderCart;

@@ -7,7 +7,7 @@ export function initAPI() {
 
 export const getAllCurrenciesAPI = async () => {
     const query = new Query("currencies", true);
-    let response = await makeQuery(query);
+    const response = await makeQuery(query);
     return response?.currencies;
 };
 
@@ -15,7 +15,7 @@ export const getAllCategoriesAPI = async () => {
     const query = new Query("category", false)
         .addField(new Field("name"))
         .addField(new Field("products", true).addField(new Field("category")));
-    let response = await makeQuery(query);
+    const response = await makeQuery(query);
     return categoriesApiToCategories(response?.category.products);
 };
 
@@ -42,11 +42,10 @@ export const getProductsByCategoryAPI = async (category) => {
                         )
                 )
         );
-    let response = await makeQuery(query);
-    response = response.category.products.map((productApi) => {
+    const response = await makeQuery(query);
+    return response.category.products.map((productApi) => {
         return productApiToProduct(productApi);
     });
-    return response;
 };
 
 export const getAllProductsAPI = async () => {
@@ -71,16 +70,15 @@ export const getAllProductsAPI = async () => {
                         )
                 )
         );
-    let response = await makeQuery(query);
-    response = response.category.products.map((productApi) => {
+    const response = await makeQuery(query);
+    return response.category.products.map((productApi) => {
         return productApiToProduct(productApi);
     });
-    return response;
 };
 
 const makeQuery = async (query) => {
     try {
-        let response = await client.post(query);
+        const response = await client.post(query);
         if (response.error) {
             throw Error(response.error);
         }
@@ -92,9 +90,9 @@ const makeQuery = async (query) => {
 
 // Create an array of categories from a response of categoriesApi
 export const categoriesApiToCategories = (categoriesApi) => {
-    let categories = [];
+    const categories = [];
     categoriesApi?.forEach((categoryApi) => {
-        let category = categoryApi.category;
+        const category = categoryApi.category;
         if (!categories.includes(category)) categories.push(category);
     });
     return categories;
@@ -104,8 +102,8 @@ export const categoriesApiToCategories = (categoriesApi) => {
 export const productApiToProduct = (product) => {
     /* Use to give default attributes to products
 
-    let newProductAttributes = product.attributes.map((attribute) => {
-        let attributeItem = attribute.items.map((item, index) => {
+    const newProductAttributes = product.attributes.map((attribute) => {
+        const attributeItem = attribute.items.map((item, index) => {
             let selectedValue = false;
             if (index === 0) {
                 selectedValue = true;

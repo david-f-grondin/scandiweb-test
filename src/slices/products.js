@@ -14,6 +14,7 @@ export const productsSlice = createSlice({
             const newProducts = action.payload;
             return [...state, ...newProducts];
         },
+        // Mutate state with new attribute selected
         selectAttribute: (state, action) => {
             const product = state.find(
                 (product) => product.id === action.payload.product.id
