@@ -21,7 +21,7 @@ To start this application, follow these steps:
 
 This project has been created with create-react-app.
 
-It uses the following dependencies:
+It uses the following dependencies (non-exhaustive list):
 
  - React Redux Toolkit, for state management.
  - React Router Dom, for navigation.
@@ -29,7 +29,7 @@ It uses the following dependencies:
  - Node Sass, to be able to use the css preprocessor, Sass.
  - Html React Parser, to display the description of products as HTML.
 
-# File structure
+# Files structure
 
 The source code of the project is contained inside the folder **./src**
 
@@ -46,22 +46,22 @@ The source code of the project is contained inside the folder **./src**
 
 ## Design
 
-This application as being implemented while trying to respect as much as possible the design.
+This application has beeng implemented while trying to respect as much as possible the design.
 However, personal decisions had to be made on points that were not specified in the design.
 
  - The application is designed to fit on a screen with a width of exactly 1440px (as seen on the design), and can somewhat adjust itself to fit on relatively smaller/larger screens. But rules for responsiveness where not given in the assignment, so it may differ from the design if the width is not exactly the same.
  
  - The brand of products shown in the design is not provided by the API. It has been replaced by the word 'Brand' for all products.
- - Animations and interactions with elements are not given in the design, and so have been kept to a minimum (on product card on hover: underline the product name, shadow for the cart circle button etc)
- - Attributes are can be changed on the PDP, in the cart and in the minicart as well. If two products in the cart become similar, they will fuse into one and the count will be updated.
+ - Animations and interactions with elements are not given in the design, so they were kept to a minimum (on product card on hover: underline the product name, shadow for the cart circle button etc)
+ - Attributes are can be changed on the PDP, in the cart and in the mini cart as well. If two products in the cart become similar, they will fuse into one and the count will be updated.
  - Swatch attributes are represented by rectangles/squares of color. If they are selected then they get a black border and padding.
  - Products attributes description is added to minicart if the attribute value doesn't make sense by itself ('yes/no' attributes for example).
  - On product cards, swatch attributes are required, they are displayed in the bottom right of the card if possible.
  
- - For navigation here is what mains buttons do:
+ - For navigation here is what main buttons do:
 	 - Logo in header, redirects to the PLP.
-	 - Product card image/product name, redirects to product detail page.
-	 - Product card circle button (appear only if product is not out of stock), redirects to PDP, or add to cart and redirect to it if all attributes have been selected.
+	 - Product card image/product name, redirects to PDP.
+	 - Product card circle button (appear only if product is not out of stock), redirects to PDP. Or, if all attributes have been selected (or no attributes), add the product to cart and redirect to cart page.
 	 - Cart, clicking on the product name/brand redirects to the PDP.
 	 - Mini cart, view cart button, redirects to the cart page.
 	 - Mini cart, check out button, do nothing.
