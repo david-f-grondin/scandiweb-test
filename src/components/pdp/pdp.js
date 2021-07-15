@@ -3,7 +3,7 @@ import parse from "html-react-parser";
 import styles from "./styles/pdp.module.scss";
 import convertToSymbol from "../../util/currencyConverter";
 import { productPriceSelector } from "../../store/selectors";
-import { initAPI, getAllProductsAPI } from "../../util/api";
+import { getAllProductsAPI } from "../../util/api";
 import AttributesPicker from "../general/attributesPicker";
 import { canBeAddedToCart } from "../../util/cartItemUtil";
 
@@ -14,8 +14,8 @@ class Pdp extends React.Component {
     }
 
     componentDidMount() {
+        // In case the app start directly on the pdp page
         if (typeof this.props.product === "undefined") {
-            initAPI();
             getAllProductsAPI(this.props.match.params.productId).then(
                 (product) => {
                     this.props.setAllProducts(product);
@@ -70,7 +70,9 @@ class Pdp extends React.Component {
                 </div>
                 <div className={styles.productInfoContainer}>
                     <div className={styles.productTitle}>
-                        <div className={styles.productTitleBrand}>Appolo</div>
+                        <div className={styles.productTitleBrand}>
+                            {this.props.product.brand}
+                        </div>
                         <div className={styles.productTitleName}>
                             {this.props.product.name}
                         </div>
@@ -84,7 +86,7 @@ class Pdp extends React.Component {
                     <div className={styles.price}>
                         {convertToSymbol(price.currency) + price.amount}
                     </div>
-                    {this.props.product.inStock ? (
+                    {canBeAddedToCart(this.props.product) ? (
                         <button
                             className={styles.addToCartButton}
                             onClick={this.addToCartClicked}
@@ -93,7 +95,9 @@ class Pdp extends React.Component {
                         </button>
                     ) : (
                         <button className={styles.outOfStockButton}>
-                            OUT OF STOCK
+                            {this.props.product.inStock
+                                ? "CHOOSE FEATURES"
+                                : "OUT OF STOCK"}
                         </button>
                     )}
                     <div className={styles.productDescription}>

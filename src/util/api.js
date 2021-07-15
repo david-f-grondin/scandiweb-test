@@ -6,23 +6,50 @@ export function initAPI() {
 }
 
 export const getAllCurrenciesAPI = async () => {
-    console.log("getAllCurrenciesAPI");
     const query = new Query("currencies", true);
     let response = await makeQuery(query);
-    return response.currencies;
+    return response?.currencies;
 };
 
 export const getAllCategoriesAPI = async () => {
-    console.log("getAllCategoriesAPI");
     const query = new Query("category", false)
         .addField(new Field("name"))
         .addField(new Field("products", true).addField(new Field("category")));
     let response = await makeQuery(query);
-    return categoriesApiToCategories(response.category.products);
+    return categoriesApiToCategories(response?.category.products);
+};
+
+export const getProductsByCategoryAPI = async (category) => {
+    const productsFields = ["id", "name", "inStock", "description", "category"];
+    const priceFields = ["currency", "amount"];
+    const attributeSetFields = ["id", "name", "type"];
+    const attributeFields = ["displayValue", "value", "id"];
+    const query = new Query("category", false)
+        .addArgument("input", "CategoryInput", { title: category })
+        .addField(new Field("name"))
+        .addField(
+            new Field("products", true)
+                .addFieldList(productsFields)
+                .addField(new Field("gallery", true))
+                .addField(new Field("prices", true).addFieldList(priceFields))
+                .addField(
+                    new Field("attributes", true)
+                        .addFieldList(attributeSetFields)
+                        .addField(
+                            new Field("items", true).addFieldList(
+                                attributeFields
+                            )
+                        )
+                )
+        );
+    let response = await makeQuery(query);
+    response = response.category.products.map((productApi) => {
+        return productApiToProduct(productApi);
+    });
+    return response;
 };
 
 export const getAllProductsAPI = async () => {
-    console.log("getAllProductsAPI");
     const productsFields = ["id", "name", "inStock", "description", "category"];
     const priceFields = ["currency", "amount"];
     const attributeSetFields = ["id", "name", "type"];
@@ -66,7 +93,7 @@ const makeQuery = async (query) => {
 // Create an array of categories from a response of categoriesApi
 export const categoriesApiToCategories = (categoriesApi) => {
     let categories = [];
-    categoriesApi.forEach((categoryApi) => {
+    categoriesApi?.forEach((categoryApi) => {
         let category = categoryApi.category;
         if (!categories.includes(category)) categories.push(category);
     });
@@ -75,6 +102,8 @@ export const categoriesApiToCategories = (categoriesApi) => {
 
 // Create a product from a productApi with default attributes
 export const productApiToProduct = (product) => {
+    /* Use to give default attributes to products
+
     let newProductAttributes = product.attributes.map((attribute) => {
         let attributeItem = attribute.items.map((item, index) => {
             let selectedValue = false;
@@ -84,10 +113,11 @@ export const productApiToProduct = (product) => {
             return { ...item, selected: selectedValue };
         });
         return { ...attribute, items: attributeItem };
-    });
+    });*/
     const newProduct = {
         ...product,
-        attributes: newProductAttributes,
+        brand: "Brand",
+        /*attributes: newProductAttributes,*/
     };
     return newProduct;
 };

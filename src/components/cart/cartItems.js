@@ -46,7 +46,7 @@ class CartItems extends React.Component {
                                     className={`${baseStyle.brand} ${styleMod.brand}`}
                                 >
                                     <Link to={"/product/" + cartItem.id}>
-                                        Apollo
+                                        {cartItem.brand}
                                     </Link>
                                 </div>
                                 <div

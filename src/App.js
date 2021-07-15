@@ -8,19 +8,27 @@ import {
     getAllCurrenciesAPI,
     getAllCategoriesAPI,
     getAllProductsAPI,
+    getProductsByCategoryAPI,
 } from "./util/api.js";
 import { setAllCategories } from "./slices/categories";
 import { setAllCurrencies } from "./slices/currencies";
 import { setAllProducts } from "./slices/products";
 
 class App extends React.Component {
-    async componentDidMount() {
+    constructor(props) {
+        super(props);
         initAPI();
+    }
+
+    async componentDidMount() {
         let response = await getAllCurrenciesAPI();
         this.props.setAllCurrencies(response);
         response = await getAllCategoriesAPI();
         this.props.setAllCategories(response);
-        response = await getAllProductsAPI();
+        response =
+            response[0] === "all"
+                ? await getProductsByCategoryAPI(response[0])
+                : await getAllProductsAPI();
         this.props.setAllProducts(response);
     }
 

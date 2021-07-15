@@ -10,7 +10,7 @@ export const categoriesSlice = createSlice({
     initialState,
     reducers: {
         selectCategory: (state, action) => {
-            state.selectedCategory = action.payload;
+            return { ...state, selectedCategory: action.payload };
         },
         // Set all categories from an array and add the category 'all'
         setAllCategories: (state, action) => {
@@ -20,8 +20,7 @@ export const categoriesSlice = createSlice({
             } else {
                 categories = ["all"];
             }
-            state.selectedCategory = categories[0];
-            state.categories = categories;
+            return { categories: categories, selectedCategory: categories[0] };
         },
     },
 });

@@ -31,7 +31,7 @@ class HeaderCurrency extends React.Component {
                 </button>
                 {this.props.isCurencySwitcherOpen ? (
                     <div className={styles.currencySwitcher}>
-                        {this.props.currencies.map((currency) => {
+                        {this.props.currencies?.map((currency) => {
                             return (
                                 <button
                                     key={currency}

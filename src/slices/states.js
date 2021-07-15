@@ -10,14 +10,18 @@ export const statesSlice = createSlice({
     initialState,
     reducers: {
         setCurrencySwitcherState: (state, action) => {
-            let isCurencySwitcherOpen = action.payload;
-            state.isCurencySwitcherOpen = isCurencySwitcherOpen;
-            if (isCurencySwitcherOpen) state.isMinicartOpen = false;
+            return {
+                isCurencySwitcherOpen: action.payload,
+                isMinicartOpen: action.payload ? false : state.isMinicartOpen,
+            };
         },
         setMinicartState: (state, action) => {
-            let isMinicartOpen = action.payload;
-            state.isMinicartOpen = isMinicartOpen;
-            if (isMinicartOpen) state.isCurencySwitcherOpen = false;
+            return {
+                isMinicartOpen: action.payload,
+                isCurencySwitcherOpen: action.payload
+                    ? false
+                    : state.isCurencySwitcherOpen,
+            };
         },
     },
 });

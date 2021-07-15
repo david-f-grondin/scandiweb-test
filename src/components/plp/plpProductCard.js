@@ -52,7 +52,9 @@ class PlpProductCard extends React.Component {
                 </div>
                 <div className={styles.productTitle}>
                     <Link to={"/product/" + this.props.product.id}>
-                        {this.props.product.name}
+                        {this.props.product.brand +
+                            " " +
+                            this.props.product.name}
                     </Link>
                 </div>
                 <div className={styles.priceSwatchContainer}>
