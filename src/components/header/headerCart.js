@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./styles/headerCart.module.scss";
 import convertToSymbol from "../../util/currencyConverter";
-import { computeCartTotal } from "../../util/cartItemUtil";
+import { computeCartTotal, countCartItems } from "../../util/cartItemUtil";
 import { ReactComponent as HeaderCartLogo } from "../../images/emptyCart.svg";
 
 class HeaderCart extends React.Component {
@@ -25,7 +25,7 @@ class HeaderCart extends React.Component {
                         <HeaderCartLogo className={styles.cartLogo} />
                         {this.props.cart.length > 0 ? (
                             <div className={styles.cartCountCircle}>
-                                {this.props.cart.length}
+                                {countCartItems(this.props.cart)}
                             </div>
                         ) : null}
                     </div>

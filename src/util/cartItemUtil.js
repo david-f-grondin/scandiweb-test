@@ -38,6 +38,15 @@ export const computeCartTotal = (cartItems, currency) => {
     return totalPrice;
 };
 
+// Compute the total number of items in a cart
+export const countCartItems = (cartItems) => {
+    let total = 0;
+    cartItems.forEach((item) => {
+        total += item.count;
+    });
+    return total;
+};
+
 // Remove one cartItem from cart items array and return the new array
 export const removeItemInCart = (itemToRemove, cartItems) => {
     const index = cartItems.findIndex((cartItem) => {
