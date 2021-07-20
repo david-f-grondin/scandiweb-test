@@ -1,5 +1,4 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import parse from "html-react-parser";
 import styles from "./styles/pdp.module.scss";
 import convertToSymbol from "../../util/currencyConverter";
@@ -31,7 +30,6 @@ class Pdp extends React.Component {
     addToCartClicked = (product) => {
         if (canBeAddedToCart(this.props.product)) {
             this.props.addItem(this.props.product);
-            this.props.history.push("/cart");
         }
     };
     render() {
@@ -111,4 +109,4 @@ class Pdp extends React.Component {
     }
 }
 
-export default withRouter(Pdp);
+export default Pdp;

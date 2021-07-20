@@ -10,7 +10,6 @@ class PlpProductCard extends React.Component {
     cartButtonClicked = () => {
         if (canBeAddedToCart(this.props.product)) {
             this.props.addItem(this.props.product);
-            this.props.history.push("/cart");
         } else {
             this.props.history.push("/product/" + this.props.product.id);
         }
