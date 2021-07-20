@@ -60,9 +60,7 @@ class CartItems extends React.Component {
                                     className={`${baseStyle.price} ${styleMod.price}`}
                                 >
                                     {convertToSymbol(price.currency) +
-                                        (cartItem.count * price.amount).toFixed(
-                                            2
-                                        )}
+                                        price.amount.toFixed(2)}
                                 </div>
                             </div>
                             <div className={baseStyle.attributes}>
