@@ -4,16 +4,48 @@ import { ReactComponent as CurrencyArrow } from "../../images/currencyArrow.svg"
 import convertToSymbol from "../../util/currencyConverter";
 
 class HeaderCurrency extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.currencySwitcherRef = React.createRef();
+        this.handleClickOutside = this.handleClickOutside.bind(this);
+    }
+
+    openCurrencySwitcher() {
+        document.addEventListener("mousedown", this.handleClickOutside);
+        this.props.setCurrencySwitcherState(true);
+    }
+
+    closeCurrencySwitcher() {
+        document.removeEventListener("mousedown", this.handleClickOutside);
+        this.props.setCurrencySwitcherState(false);
+    }
+
+    handleClickOutside(event) {
+        if (
+            this.currencySwitcherRef &&
+            !this.currencySwitcherRef.current.contains(event.target)
+        ) {
+            this.closeCurrencySwitcher();
+        }
+    }
+
     currencyClicked = (e) => {
-        this.props.setCurrencySwitcherState(!this.props.isCurencySwitcherOpen);
+        if (this.props.isCurencySwitcherOpen) this.closeCurrencySwitcher();
+        else this.openCurrencySwitcher();
     };
+
     currencyOptionClicked = (currency) => {
         this.props.selectCurrency(currency);
-        this.props.setCurrencySwitcherState(false);
+        this.closeCurrencySwitcher();
     };
+
     render() {
         return (
-            <div className={styles.currencyContainer}>
+            <div
+                ref={this.currencySwitcherRef}
+                className={styles.currencyContainer}
+            >
                 <button
                     className={styles.currencyButton}
                     onClick={this.currencyClicked}
@@ -29,7 +61,7 @@ class HeaderCurrency extends React.Component {
                         }
                     />
                 </button>
-                {this.props.isCurencySwitcherOpen ? (
+                {this.props.isCurencySwitcherOpen && (
                     <div className={styles.currencySwitcher}>
                         {this.props.currencies?.map((currency) => {
                             return (
@@ -45,7 +77,7 @@ class HeaderCurrency extends React.Component {
                             );
                         })}
                     </div>
-                ) : null}
+                )}
             </div>
         );
     }
