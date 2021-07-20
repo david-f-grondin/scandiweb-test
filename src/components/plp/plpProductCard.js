@@ -4,7 +4,6 @@ import styles from "./styles/plpProductCard.module.scss";
 import cartLogo from "../../images/emptyCart.svg";
 import convertToSymbol from "../../util/currencyConverter";
 import { productPriceSelector } from "../../store/selectors";
-import AttributesPicker from "../general/attributesPicker";
 import { canBeAddedToCart } from "../../util/cartItemUtil";
 
 class PlpProductCard extends React.Component {
@@ -59,27 +58,12 @@ class PlpProductCard extends React.Component {
                             this.props.product.name}
                     </Link>
                 </div>
-                <div className={styles.priceSwatchContainer}>
-                    <div className={styles.price}>
-                        {convertToSymbol(price.currency) +
-                            price.amount.toFixed(2)}
-                    </div>
-                    <div className={styles.swatchContainer}>
-                        <AttributesPicker
-                            styleMod="1"
-                            product={this.props.product}
-                            selectAttribute={this.props.selectAttribute}
-                            filterAttributesByType={filterAttributesByType}
-                            filterAttributesHeader={filterAttributesHeader}
-                        />
-                    </div>
+                <div className={styles.price}>
+                    {convertToSymbol(price.currency) + price.amount.toFixed(2)}
                 </div>
             </div>
         );
     }
 }
-
-const filterAttributesByType = ["text"];
-const filterAttributesHeader = ["Color"];
 
 export default withRouter(PlpProductCard);

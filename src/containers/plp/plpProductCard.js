@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { selectedCurrencySelector } from "../../store/selectors";
-import { selectAttribute } from "../../slices/products";
 import { addItem } from "../../slices/cart";
 import PlpProductCard from "../../components/plp/plpProductCard";
 
@@ -12,7 +11,6 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         addItem: bindActionCreators(addItem, dispatch),
-        selectAttribute: bindActionCreators(selectAttribute, dispatch),
     };
 };
 

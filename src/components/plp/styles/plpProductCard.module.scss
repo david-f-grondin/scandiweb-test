@@ -45,17 +45,6 @@
     font-weight: 500;
 }
 
-.priceSwatchContainer {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.swatchContainer {
-    margin-left: 0.5rem;
-}
-
 .productsCard:hover {
     box-shadow: 0px 4px 35px hsla(210, 5%, 67%, 0.19);
     & .circle {
