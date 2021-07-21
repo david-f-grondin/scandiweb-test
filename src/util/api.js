@@ -24,11 +24,9 @@ export const getAllCurrenciesAPI = async () => {
 };
 
 export const getAllCategoriesAPI = async () => {
-    const query = new Query("category", false)
-        .addField(new Field("name"))
-        .addField(new Field("products", true).addField(new Field("category")));
+    const query = new Query("categories", false).addField(new Field("name"));
     const response = await makeQuery(query);
-    return categoriesApiToCategories(response?.category.products);
+    return categoriesApiToCategories(response?.categories);
 };
 
 export const getProductsByCategoryAPI = async (category) => {
@@ -92,8 +90,7 @@ const makeQuery = async (query) => {
 export const categoriesApiToCategories = (categoriesApi) => {
     const categories = [];
     categoriesApi?.forEach((categoryApi) => {
-        const category = categoryApi.category;
-        if (!categories.includes(category)) categories.push(category);
+        categories.push(categoryApi.name);
     });
     return categories;
 };
