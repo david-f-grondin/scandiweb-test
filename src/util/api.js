@@ -1,6 +1,18 @@
 import { client, Query, Field } from "@tilework/opus";
 const settings = require("../settings.json");
 
+const productsFields = [
+    "id",
+    "name",
+    "inStock",
+    "description",
+    "category",
+    "brand",
+];
+const priceFields = ["currency", "amount"];
+const attributeSetFields = ["id", "name", "type"];
+const attributeFields = ["displayValue", "value", "id"];
+
 export function initAPI() {
     client.setEndpoint(settings.api_endpoint);
 }
@@ -20,10 +32,6 @@ export const getAllCategoriesAPI = async () => {
 };
 
 export const getProductsByCategoryAPI = async (category) => {
-    const productsFields = ["id", "name", "inStock", "description", "category"];
-    const priceFields = ["currency", "amount"];
-    const attributeSetFields = ["id", "name", "type"];
-    const attributeFields = ["displayValue", "value", "id"];
     const query = new Query("category", false)
         .addArgument("input", "CategoryInput", { title: category })
         .addField(new Field("name"))
@@ -43,16 +51,10 @@ export const getProductsByCategoryAPI = async (category) => {
                 )
         );
     const response = await makeQuery(query);
-    return response?.category.products.map((productApi) => {
-        return productApiToProduct(productApi);
-    });
+    return response?.category.products;
 };
 
 export const getAllProductsAPI = async () => {
-    const productsFields = ["id", "name", "inStock", "description", "category"];
-    const priceFields = ["currency", "amount"];
-    const attributeSetFields = ["id", "name", "type"];
-    const attributeFields = ["displayValue", "value", "id"];
     const query = new Query("category", false)
         .addField(new Field("name"))
         .addField(
@@ -71,9 +73,7 @@ export const getAllProductsAPI = async () => {
                 )
         );
     const response = await makeQuery(query);
-    return response?.category.products.map((productApi) => {
-        return productApiToProduct(productApi);
-    });
+    return response?.category.products;
 };
 
 const makeQuery = async (query) => {
@@ -96,26 +96,4 @@ export const categoriesApiToCategories = (categoriesApi) => {
         if (!categories.includes(category)) categories.push(category);
     });
     return categories;
-};
-
-// Create a product from a productApi with default attributes
-export const productApiToProduct = (product) => {
-    /* Use to give default attributes to products
-
-    const newProductAttributes = product.attributes.map((attribute) => {
-        const attributeItem = attribute.items.map((item, index) => {
-            let selectedValue = false;
-            if (index === 0) {
-                selectedValue = true;
-            }
-            return { ...item, selected: selectedValue };
-        });
-        return { ...attribute, items: attributeItem };
-    });*/
-    const newProduct = {
-        ...product,
-        brand: "Brand",
-        /*attributes: newProductAttributes,*/
-    };
-    return newProduct;
 };
