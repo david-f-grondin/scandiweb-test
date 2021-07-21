@@ -29,6 +29,23 @@ export const getAllCategoriesAPI = async () => {
     return categoriesApiToCategories(response?.categories);
 };
 
+export const getProductByIdAPI = async (productId) => {
+    const query = new Query("product", false)
+        .addArgument("id", "String!", productId)
+        .addFieldList(productsFields)
+        .addField(new Field("gallery", true))
+        .addField(new Field("prices", true).addFieldList(priceFields))
+        .addField(
+            new Field("attributes", true)
+                .addFieldList(attributeSetFields)
+                .addField(
+                    new Field("items", true).addFieldList(attributeFields)
+                )
+        );
+    const response = await makeQuery(query);
+    return response?.product;
+};
+
 export const getProductsByCategoryAPI = async (category) => {
     const query = new Query("category", false)
         .addArgument("input", "CategoryInput", { title: category })

@@ -3,7 +3,7 @@ import parse from "html-react-parser";
 import styles from "./styles/pdp.module.scss";
 import convertToSymbol from "../../util/currencyConverter";
 import { productPriceSelector } from "../../store/selectors";
-import { getAllProductsAPI } from "../../util/api";
+import { getProductByIdAPI } from "../../util/api";
 import AttributesPicker from "../general/attributesPicker";
 import { canBeAddedToCart } from "../../util/cartItemUtil";
 
@@ -16,9 +16,9 @@ class Pdp extends React.Component {
     componentDidMount() {
         // In case the app start directly on the pdp page
         if (typeof this.props.product === "undefined") {
-            getAllProductsAPI(this.props.match.params.productId).then(
+            getProductByIdAPI(this.props.match.params.productId).then(
                 (product) => {
-                    this.props.setAllProducts(product);
+                    this.props.setAllProducts([product]);
                 }
             );
         }

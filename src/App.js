@@ -13,6 +13,7 @@ import {
 import { setAllCategories } from "./slices/categories";
 import { setAllCurrencies } from "./slices/currencies";
 import { setAllProducts } from "./slices/products";
+import { productsSelector } from "./store/selectors";
 
 class App extends React.Component {
     constructor(props) {
@@ -25,11 +26,13 @@ class App extends React.Component {
         this.props.setAllCurrencies(response);
         response = await getAllCategoriesAPI();
         this.props.setAllCategories(response);
-        response =
-            response[0] === "all"
-                ? await getProductsByCategoryAPI(response[0])
-                : await getAllProductsAPI();
-        this.props.setAllProducts(response);
+        if (this.props.products?.length === 0) {
+            response =
+                response[0] === "all"
+                    ? await getAllProductsAPI()
+                    : await getProductsByCategoryAPI(response[0]);
+            this.props.setAllProducts(response);
+        }
     }
 
     render() {
@@ -41,6 +44,10 @@ class App extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state, ownProps) => ({
+    products: productsSelector(state),
+});
 
 const mapDispatchToProps = (dispatch) => ({
     setAllCategories: (payload) => {
@@ -54,4 +61,4 @@ const mapDispatchToProps = (dispatch) => ({
     },
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
