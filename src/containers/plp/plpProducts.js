@@ -3,7 +3,7 @@ import { productsCurrentCategorySelector } from "../../store/selectors";
 import PlpProducts from "../../components/plp/plpProducts";
 import PlpProductCard from "./plpProductCard";
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
     products: productsCurrentCategorySelector(state),
     plpProductCard: PlpProductCard,
 });

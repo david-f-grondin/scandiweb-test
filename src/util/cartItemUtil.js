@@ -16,7 +16,7 @@ export const isSameItem = (item1, item2) => {
 
 // Check if a cart item is present in a cart item array and return its index or -1
 export const getIndexOfItemInCart = (item, items) => {
-    return items.findIndex((elem, index) => isSameItem(elem, item));
+    return items.findIndex((elem) => isSameItem(elem, item));
 };
 
 // Return indexes of occurences of item in a cart items

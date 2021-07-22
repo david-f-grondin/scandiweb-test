@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { selectedCategorySelector } from "../../store/selectors";
 import PlpCategory from "../../components/plp/plpCategory";
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
     category: selectedCategorySelector(state),
 });
 

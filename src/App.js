@@ -45,7 +45,7 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
     products: productsSelector(state),
 });
 

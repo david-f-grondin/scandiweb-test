@@ -51,26 +51,18 @@ class CartItems extends React.Component {
                             key={index}
                             className={`${baseStyle.item} ${style.item}`}
                         >
-                            <div
-                                className={`${baseStyle.namePrice} ${style.namePrice}`}
-                            >
-                                <div
-                                    className={`${baseStyle.brand} ${style.brand}`}
-                                >
+                            <div className={style.namePrice}>
+                                <div className={style.brand}>
                                     <Link to={"/product/" + cartItem.id}>
                                         {cartItem.brand}
                                     </Link>
                                 </div>
-                                <div
-                                    className={`${baseStyle.name} ${style.name}`}
-                                >
+                                <div className={style.name}>
                                     <Link to={"/product/" + cartItem.id}>
                                         {cartItem.name}
                                     </Link>
                                 </div>
-                                <div
-                                    className={`${baseStyle.price} ${style.price}`}
-                                >
+                                <div className={style.price}>
                                     {convertToSymbol(price.currency) +
                                         price.amount.toFixed(2)}
                                 </div>

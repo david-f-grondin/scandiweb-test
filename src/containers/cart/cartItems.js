@@ -7,7 +7,7 @@ import {
 } from "../../store/selectors";
 import CartItems from "../../components/cart/cartItems";
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
     cartItems: cartItemsSelector(state),
     selectedCurrency: selectedCurrencySelector(state),
 });

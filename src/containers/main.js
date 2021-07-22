@@ -6,7 +6,7 @@ import Cart from "./cart/cart";
 import { setMinicartState } from "../slices/states";
 import { minicartStateSelector } from "../store/selectors";
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
     plp: Plp,
     pdp: Pdp,
     cart: Cart,

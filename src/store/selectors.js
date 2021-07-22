@@ -4,10 +4,7 @@ export const selectedCategorySelector = ({ categories }) =>
     categories.selectedCategory;
 
 // Products
-export const productNameSelector = (product) => product.name;
 export const productsSelector = ({ products }) => products;
-export const productsByCategorySelector = ({ products }, category) =>
-    products.filter((product) => product.category === category);
 export const productsCurrentCategorySelector = ({ products, categories }) =>
     products.filter(
         (product) =>

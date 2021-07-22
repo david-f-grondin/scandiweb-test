@@ -48,42 +48,35 @@ class AttributesPicker extends React.Component {
                         return (
                             <div
                                 key={attributeSet.id}
-                                className={`${baseStyle.attributeSet} ${style.attributeSet}`}
+                                className={style.attributeSet}
                             >
                                 {!filterAttributesHeader.includes(
                                     attributeSet.name
                                 ) && (
-                                    <div
-                                        className={`${baseStyle.attributeSetName} ${style.attributeSetName}`}
-                                    >
+                                    <div className={style.attributeSetName}>
                                         {styleMod === "1"
                                             ? attributeSet.name
                                             : attributeSet.name.toUpperCase()}
                                         :
                                     </div>
                                 )}
-                                <div
-                                    className={`${baseStyle.attributeSetItems} ${style.attributeSetItems}`}
-                                >
+                                <div className={style.attributeSetItems}>
                                     {attributeSet.items.map((item) => {
                                         return (
                                             <button
                                                 key={item.id}
                                                 className={`${
-                                                    baseStyle.attributesButton
-                                                } ${style.attributesButton} ${
-                                                    item.selected
-                                                        ? `${baseStyle.selectedButton} ${style.selectedButton}`
-                                                        : ""
+                                                    style.attributesButton
                                                 } ${
-                                                    isSwatch
-                                                        ? `${baseStyle.swatchAttribute} ${style.swatchAttribute}`
-                                                        : ""
+                                                    item.selected &&
+                                                    style.selectedButton
+                                                } ${
+                                                    isSwatch &&
+                                                    style.swatchAttribute
                                                 }
                                                 ${
-                                                    isText
-                                                        ? `${baseStyle.textAttribute} ${style.textAttribute}`
-                                                        : ""
+                                                    isText &&
+                                                    style.textAttribute
                                                 }`}
                                                 style={{
                                                     background: `${
@@ -99,11 +92,9 @@ class AttributesPicker extends React.Component {
                                                     )
                                                 }
                                             >
-                                                <span>
-                                                    {!isSwatch
-                                                        ? item.value
-                                                        : " "}
-                                                </span>
+                                                {!isSwatch && (
+                                                    <span>{item.value}</span>
+                                                )}
                                             </button>
                                         );
                                     })}

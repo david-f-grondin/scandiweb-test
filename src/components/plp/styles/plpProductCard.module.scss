@@ -1,4 +1,4 @@
-.productsCard {
+.productCard {
     padding: 1rem;
     font-size: 1.125em;
     max-width: 24.125rem;
@@ -45,7 +45,7 @@
     font-weight: 500;
 }
 
-.productsCard:hover {
+.productCard:hover {
     box-shadow: 0px 4px 35px hsla(210, 5%, 67%, 0.19);
     & .circle {
         visibility: visible;

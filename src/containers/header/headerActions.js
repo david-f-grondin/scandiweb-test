@@ -3,7 +3,7 @@ import HeaderActions from "../../components/header/headerActions";
 import HeaderCurrency from "./headerCurrency";
 import HeaderCart from "./headerCart";
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = () => ({
     headerCurrency: HeaderCurrency,
     headerCart: HeaderCart,
 });

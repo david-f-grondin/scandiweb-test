@@ -9,7 +9,7 @@ import {
 import { setCurrencySwitcherState } from "../../slices/states";
 import { selectCurrency } from "../../slices/currencies";
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
     currencies: currenciesSelector(state),
     selectedCurrency: selectedCurrencySelector(state),
     isCurencySwitcherOpen: currencySwitcherStateSelector(state),

@@ -4,7 +4,7 @@ import { selectedCurrencySelector } from "../../store/selectors";
 import { addItem } from "../../slices/cart";
 import PlpProductCard from "../../components/plp/plpProductCard";
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
     selectedCurrency: selectedCurrencySelector(state),
 });
 

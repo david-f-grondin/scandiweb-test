@@ -23,9 +23,7 @@ class HeaderCategory extends React.Component {
 
         return (
             <button
-                className={`${style.category} ${
-                    selected ? style.selected : ""
-                }`}
+                className={`${style.category} ${selected && style.selected}`}
                 onClick={this.handleClick}
             >
                 <span>{category.toUpperCase()}</span>

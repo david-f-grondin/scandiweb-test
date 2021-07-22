@@ -57,7 +57,7 @@ class HeaderCurrency extends React.Component {
                         {convertToSymbol(selectedCurrency)}
                     </span>
                     <CurrencyArrow
-                        className={isCurencySwitcherOpen ? style.arrowUp : ""}
+                        className={isCurencySwitcherOpen && style.arrowUp}
                     />
                 </button>
                 {isCurencySwitcherOpen && (

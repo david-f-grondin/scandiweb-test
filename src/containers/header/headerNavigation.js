@@ -6,7 +6,7 @@ import {
 import HeaderNavigation from "../../components/header/headerNavigation";
 import HeaderCategory from "./headerCategory";
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
     headerCategory: HeaderCategory,
     categories: categoriesSelector(state),
     selectedCategory: selectedCategorySelector(state),

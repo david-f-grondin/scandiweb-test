@@ -3,7 +3,7 @@ import Header from "../../components/header/header";
 import HeaderAction from "./headerActions";
 import HeaderNavigation from "./headerNavigation";
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = () => ({
     headerNavigation: HeaderNavigation,
     headerActions: HeaderAction,
 });

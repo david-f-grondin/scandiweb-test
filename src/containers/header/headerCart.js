@@ -9,7 +9,7 @@ import {
 import { setMinicartState } from "../../slices/states";
 import CartItems from "../cart/cartItems";
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
     cart: cartItemsSelector(state),
     isMinicartOpen: minicartStateSelector(state),
     selectedCurrency: selectedCurrencySelector(state),

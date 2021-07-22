@@ -22,14 +22,12 @@ class PlpProductCard extends React.Component {
         const price = productPriceSelector(product, selectedCurrency);
 
         return (
-            <div className={style.productsCard}>
+            <div className={style.productCard}>
                 <div className={style.productImageContainer}>
                     <Link to={"/product/" + product.id}>
                         <img
                             className={`${style.productImage} ${
-                                !product.inStock
-                                    ? style.productImageOutOfStock
-                                    : ""
+                                !product.inStock && style.productImageOutOfStock
                             }`}
                             src={product.gallery[0]}
                             alt=""
