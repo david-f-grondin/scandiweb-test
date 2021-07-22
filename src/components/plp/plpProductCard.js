@@ -27,7 +27,9 @@ class PlpProductCard extends React.Component {
                     <Link to={"/product/" + product.id}>
                         <img
                             className={`${style.productImage} ${
-                                !product.inStock && style.productImageOutOfStock
+                                !product.inStock
+                                    ? style.productImageOutOfStock
+                                    : ""
                             }`}
                             src={product.gallery[0]}
                             alt=""

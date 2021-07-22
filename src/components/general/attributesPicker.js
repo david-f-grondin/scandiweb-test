@@ -68,15 +68,18 @@ class AttributesPicker extends React.Component {
                                                 className={`${
                                                     style.attributesButton
                                                 } ${
-                                                    item.selected &&
-                                                    style.selectedButton
+                                                    item.selected
+                                                        ? style.selectedButton
+                                                        : ""
                                                 } ${
-                                                    isSwatch &&
-                                                    style.swatchAttribute
+                                                    isSwatch
+                                                        ? style.swatchAttribute
+                                                        : ""
                                                 }
                                                 ${
-                                                    isText &&
-                                                    style.textAttribute
+                                                    isText
+                                                        ? style.textAttribute
+                                                        : ""
                                                 }`}
                                                 style={{
                                                     background: `${
