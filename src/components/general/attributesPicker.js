@@ -11,51 +11,59 @@ class AttributesPicker extends React.Component {
             attributeId: attributeId,
         });
     };
+
+    getStyleMod = (styleMod) => {
+        switch (styleMod) {
+            case "1":
+                return style1;
+            case "2":
+                return style2;
+            default:
+                return style1;
+        }
+    };
+
     render() {
-        const styleMod = (() => {
-            switch (this.props.styleMod) {
-                case "1":
-                    return style1;
-                case "2":
-                    return style2;
-                default:
-                    return style1;
-            }
-        })();
+        const {
+            product,
+            filterAttributes,
+            filterAttributesByType,
+            filterAttributesHeader,
+            styleMod,
+        } = this.props;
+
+        const style = this.getStyleMod(styleMod);
+
         return (
             <div
-                className={`${baseStyle.attributeSets} ${styleMod.attributeSets}`}
+                className={`${baseStyle.attributeSets} ${style.attributeSets}`}
             >
-                {this.props.product.attributes.map((attributeSet) => {
+                {product.attributes.map((attributeSet) => {
                     const isSwatch = attributeSet.type === "swatch";
                     const isText = attributeSet.type === "text";
                     if (
-                        !this.props.filterAttributes.includes(
-                            attributeSet.name
-                        ) &&
-                        !this.props.filterAttributesByType.includes(
-                            attributeSet.type
-                        )
+                        !filterAttributes.includes(attributeSet.name) &&
+                        !filterAttributesByType.includes(attributeSet.type)
                     ) {
                         return (
                             <div
                                 key={attributeSet.id}
-                                className={`${baseStyle.attributeSet} ${styleMod.attributeSet}`}
+                                className={`${baseStyle.attributeSet} ${style.attributeSet}`}
                             >
-                                {!this.props.filterAttributesHeader.includes(
+                                {!filterAttributesHeader.includes(
                                     attributeSet.name
-                                ) ? (
+                                ) && (
                                     <div
-                                        className={`${baseStyle.attributeSetName} ${styleMod.attributeSetName}`}
+                                        className={`${baseStyle.attributeSetName} ${style.attributeSetName}`}
                                     >
-                                        {this.props.styleMod === "1"
+                                        {styleMod === "1"
                                             ? attributeSet.name
                                             : attributeSet.name.toUpperCase()}
                                         :
                                     </div>
-                                ) : null}
+                                )}
                                 <div
-                                    className={`${baseStyle.attributeSetItems} ${styleMod.attributeSetItems}`}
+                                    className={`${baseStyle.attributeSetItems} ${style.attributeSetItems}`}
                                 >
                                     {attributeSet.items.map((item) => {
                                         return (
@@ -63,20 +71,18 @@ class AttributesPicker extends React.Component {
                                                 key={item.id}
                                                 className={`${
                                                     baseStyle.attributesButton
-                                                } ${
-                                                    styleMod.attributesButton
-                                                } ${
+                                                } ${style.attributesButton} ${
                                                     item.selected
-                                                        ? `${baseStyle.selectedButton} ${styleMod.selectedButton}`
+                                                        ? `${baseStyle.selectedButton} ${style.selectedButton}`
                                                         : ""
                                                 } ${
                                                     isSwatch
-                                                        ? `${baseStyle.swatchAttribute} ${styleMod.swatchAttribute}`
+                                                        ? `${baseStyle.swatchAttribute} ${style.swatchAttribute}`
                                                         : ""
                                                 }
                                                 ${
                                                     isText
-                                                        ? `${baseStyle.textAttribute} ${styleMod.textAttribute}`
+                                                        ? `${baseStyle.textAttribute} ${style.textAttribute}`
                                                         : ""
                                                 }`}
                                                 style={{

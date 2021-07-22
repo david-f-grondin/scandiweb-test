@@ -1,14 +1,13 @@
 import React from "react";
-import styles from "./styles/cart.module.scss";
+import style from "./styles/cart.module.scss";
 
 class Cart extends React.Component {
     render() {
         const { cartItems: CartItems } = this.props;
-        const filterAttributesHeader = ["Size", "Color", "Capacity"];
 
         return (
-            <div className={styles.cartContainer}>
-                <div className={styles.cartTitle}>CART</div>
+            <div className={style.cartContainer}>
+                <div className={style.cartTitle}>CART</div>
                 <CartItems
                     styleMod="2"
                     filterAttributesHeader={filterAttributesHeader}
@@ -17,5 +16,7 @@ class Cart extends React.Component {
         );
     }
 }
+
+const filterAttributesHeader = ["Size", "Color", "Capacity"];
 
 export default Cart;

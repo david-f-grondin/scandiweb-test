@@ -1,12 +1,12 @@
 import React from "react";
-import styles from "./styles/plpCategory.module.scss";
+import style from "./styles/plpCategory.module.scss";
 
 class Plp extends React.Component {
     render() {
+        const { category } = this.props;
+
         return (
-            <div className={styles.categoryTitle}>
-                {this.props.category.toUpperCase()}
-            </div>
+            <div className={style.categoryTitle}>{category.toUpperCase()}</div>
         );
     }
 }

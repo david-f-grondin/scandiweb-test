@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles/imageCarousel.module.scss";
+import style from "./styles/imageCarousel.module.scss";
 import arrowCarousel from "../../images/arrowCarousel.svg";
 
 class ImageCarousel extends React.Component {
@@ -7,50 +7,57 @@ class ImageCarousel extends React.Component {
         super(props);
         this.state = { index: 0 };
     }
+
     previousImgClicked = () => {
-        if (this.state.index > 0)
-            this.setState({ index: this.state.index - 1 });
-        else this.setState({ index: this.props.images.length - 1 });
+        const index = this.state.index;
+        const images = this.props.images;
+
+        if (index > 0) this.setState({ index: index - 1 });
+        else this.setState({ index: images.length - 1 });
     };
+
     nextImgClicked = () => {
-        if (this.state.index < this.props.images.length - 1) {
-            this.setState({ index: this.state.index + 1 });
+        const index = this.state.index;
+        const images = this.props.images;
+
+        if (index < images.length - 1) {
+            this.setState({ index: index + 1 });
         } else this.setState({ index: 0 });
     };
-    render() {
-        return (
-            <div className={styles.imageCarousel}>
-                <div className={styles.helperImage} />
-                <img
-                    className={styles.image}
-                    src={this.props.images[this.state.index]}
-                    alt=""
-                ></img>
 
-                {this.props.isNavigable && this.props.images.length > 1 ? (
+    render() {
+        const { images, isNavigable } = this.props;
+        const { index } = this.state;
+
+        return (
+            <div className={style.imageCarousel}>
+                <div className={style.helperImage} />
+                <img className={style.image} src={images[index]} alt=""></img>
+
+                {isNavigable && images.length > 1 && (
                     <button
-                        className={styles.previousButton}
+                        className={style.previousButton}
                         onClick={this.previousImgClicked}
                     >
                         <img
-                            className={styles.previousArrow}
+                            className={style.previousArrow}
                             src={arrowCarousel}
                             alt=""
                         ></img>
                     </button>
-                ) : null}
-                {this.props.isNavigable && this.props.images.length > 1 ? (
+                )}
+                {isNavigable && images.length > 1 && (
                     <button
-                        className={styles.nextButton}
+                        className={style.nextButton}
                         onClick={this.nextImgClicked}
                     >
                         <img
-                            className={styles.nextArrow}
+                            className={style.nextArrow}
                             src={arrowCarousel}
                             alt=""
                         ></img>
                     </button>
-                ) : null}
+                )}
             </div>
         );
     }

@@ -1,73 +1,82 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./styles/headerCart.module.scss";
+import style from "./styles/headerCart.module.scss";
 import convertToSymbol from "../../util/currencyConverter";
 import { computeCartTotal, countCartItems } from "../../util/cartItemUtil";
 import { ReactComponent as HeaderCartLogo } from "../../images/emptyCart.svg";
 
 class HeaderCart extends React.Component {
     minicartClicked = () => {
-        this.props.setMinicartState(!this.props.isMinicartOpen);
+        const { isMinicartOpen, setMinicartState } = this.props;
+        setMinicartState(!isMinicartOpen);
     };
+
     viewCartClicked = () => {
-        this.props.setMinicartState(false);
+        const { setMinicartState } = this.props;
+        setMinicartState(false);
     };
+
     render() {
-        const { cartItems: CartItems } = this.props;
+        const {
+            cart,
+            isMinicartOpen,
+            selectedCurrency,
+            cartItems: CartItems,
+        } = this.props;
 
         return (
-            <div className={styles.cartContainer}>
+            <div className={style.cartContainer}>
                 <button
-                    className={styles.cartButton}
+                    className={style.cartButton}
                     onClick={this.minicartClicked}
                 >
-                    <div className={styles.cartLogoContainer}>
-                        <HeaderCartLogo className={styles.cartLogo} />
-                        {this.props.cart.length > 0 ? (
-                            <div className={styles.cartCountCircle}>
-                                {countCartItems(this.props.cart)}
+                    <div className={style.cartLogoContainer}>
+                        <HeaderCartLogo className={style.cartLogo} />
+                        {cart.length > 0 && (
+                            <div className={style.cartCountCircle}>
+                                {countCartItems(cart)}
                             </div>
-                        ) : null}
+                        )}
                     </div>
                 </button>
-                {this.props.isMinicartOpen ? (
-                    <div className={styles.minicart}>
-                        <div className={styles.itemsCounter}>
-                            <span className={styles.itemsCounterBold}>
+                {isMinicartOpen && (
+                    <div className={style.minicart}>
+                        <div className={style.itemsCounter}>
+                            <span className={style.itemsCounterBold}>
                                 My Bag,
                             </span>
-                            <span> {this.props.cart.length} items</span>
+                            <span> {cart.length} items</span>
                         </div>
                         <CartItems
                             styleMod="1"
                             filterAttributes={filterAttributes}
                             filterAttributesHeader={filterAttributesHeader}
                         />
-                        <div className={styles.total}>
-                            <span className={styles.totalText}>Total</span>
-                            <span className={styles.totalValue}>
-                                {convertToSymbol(this.props.selectedCurrency) +
+                        <div className={style.total}>
+                            <span className={style.totalText}>Total</span>
+                            <span className={style.totalValue}>
+                                {convertToSymbol(selectedCurrency) +
                                     computeCartTotal(
-                                        this.props.cart,
-                                        this.props.selectedCurrency
+                                        cart,
+                                        selectedCurrency
                                     ).toFixed(2)}
                             </span>
                         </div>
-                        <div className={styles.buttonsContainer}>
+                        <div className={style.buttonsContainer}>
                             <Link to="/cart">
                                 <button
-                                    className={styles.viewButton}
+                                    className={style.viewButton}
                                     onClick={this.viewCartClicked}
                                 >
                                     VIEW BAG
                                 </button>
                             </Link>
-                            <button className={styles.checkOutButton}>
+                            <button className={style.checkOutButton}>
                                 CHECK OUT
                             </button>
                         </div>
                     </div>
-                ) : null}
+                )}
             </div>
         );
     }

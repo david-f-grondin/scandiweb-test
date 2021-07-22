@@ -33,14 +33,14 @@ export const cartSlice = createSlice({
         },
         // Fuse all similar cart items into one (state mutation allowed by Immer)
         selectAttribute: (state, action) => {
-            const product =
-                state[getIndexOfItemInCart(action.payload.product, state)];
-
-            const attributeSet = selectAttributeSet(
-                action.payload.attributeSetId,
-                product
-            );
-            selectAttributeInSet(action.payload.attributeId, attributeSet);
+            const {
+                attributeSetId,
+                attributeId,
+                product: actionProduct,
+            } = action.payload;
+            const product = state[getIndexOfItemInCart(actionProduct, state)];
+            const attributeSet = selectAttributeSet(attributeSetId, product);
+            selectAttributeInSet(attributeId, attributeSet);
 
             const indexesOfItemInCart = getIndexesOfItemInCart(product, state);
             let numberOfSimilarItems = 0;

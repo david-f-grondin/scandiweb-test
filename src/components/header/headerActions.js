@@ -5,6 +5,7 @@ class HeaderActions extends React.Component {
     render() {
         const { headerCurrency: HeaderCurrency, headerCart: HeaderCart } =
             this.props;
+
         return (
             <div className={styles.actionsContainer}>
                 <HeaderCurrency />

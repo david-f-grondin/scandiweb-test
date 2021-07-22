@@ -1,6 +1,6 @@
 import React from "react";
 import parse from "html-react-parser";
-import styles from "./styles/pdp.module.scss";
+import style from "./styles/pdp.module.scss";
 import convertToSymbol from "../../util/currencyConverter";
 import { productPriceSelector } from "../../store/selectors";
 import { getProductByIdAPI } from "../../util/api";
@@ -14,40 +14,46 @@ class Pdp extends React.Component {
     }
 
     componentDidMount() {
+        const { product, match, setAllProducts } = this.props;
+        const { productId } = match.params;
+
         // In case the app start directly on the pdp page
-        if (typeof this.props.product === "undefined") {
-            getProductByIdAPI(this.props.match.params.productId).then(
-                (product) => {
-                    this.props.setAllProducts([product]);
-                }
-            );
+        if (typeof product === "undefined") {
+            getProductByIdAPI(productId).then((product) => {
+                setAllProducts([product]);
+            });
         }
     }
 
     imagePicked = (index) => {
         this.setState({ imageDisplayed: index });
     };
-    addToCartClicked = (product) => {
-        if (canBeAddedToCart(this.props.product)) {
-            this.props.addItem(this.props.product);
+
+    addToCartClicked = () => {
+        const { product, addItem } = this.props;
+
+        if (canBeAddedToCart(product)) {
+            addItem(product);
         }
     };
+
     render() {
-        if (typeof this.props.product === "undefined") {
+        const { product, selectedCurrency, selectAttribute } = this.props;
+
+        if (typeof product === "undefined") {
             return (
                 <div>
                     <h1>Sorry, this product is not available.</h1>
                 </div>
             );
         }
-        const price = productPriceSelector(
-            this.props.product,
-            this.props.selectedCurrency
-        );
+
+        const price = productPriceSelector(product, selectedCurrency);
+
         return (
-            <div className={styles.pdpContainer}>
-                <div className={styles.imagePicker}>
-                    {this.props.product.gallery.map((image, index) => {
+            <div className={style.pdpContainer}>
+                <div className={style.imagePicker}>
+                    {product.gallery.map((image, index) => {
                         return (
                             <button
                                 key={index}
@@ -58,50 +64,46 @@ class Pdp extends React.Component {
                         );
                     })}
                 </div>
-                <div className={styles.mainImageContainer}>
+                <div className={style.mainImageContainer}>
                     <img
-                        src={
-                            this.props.product.gallery[
-                                this.state.imageDisplayed
-                            ]
-                        }
+                        src={product.gallery[this.state.imageDisplayed]}
                         alt=""
                     ></img>
                 </div>
-                <div className={styles.productInfoContainer}>
-                    <div className={styles.productTitle}>
-                        <div className={styles.productTitleBrand}>
-                            {this.props.product.brand}
+                <div className={style.productInfoContainer}>
+                    <div className={style.productTitle}>
+                        <div className={style.productTitleBrand}>
+                            {product.brand}
                         </div>
-                        <div className={styles.productTitleName}>
-                            {this.props.product.name}
+                        <div className={style.productTitleName}>
+                            {product.name}
                         </div>
                     </div>
                     <AttributesPicker
                         styleMod="2"
-                        product={this.props.product}
-                        selectAttribute={this.props.selectAttribute}
+                        product={product}
+                        selectAttribute={selectAttribute}
                     />
-                    <div className={styles.priceHeader}>PRICE:</div>
-                    <div className={styles.price}>
+                    <div className={style.priceHeader}>PRICE:</div>
+                    <div className={style.price}>
                         {convertToSymbol(price.currency) + price.amount}
                     </div>
-                    {canBeAddedToCart(this.props.product) ? (
+                    {canBeAddedToCart(product) ? (
                         <button
-                            className={styles.addToCartButton}
+                            className={style.addToCartButton}
                             onClick={this.addToCartClicked}
                         >
                             ADD TO CART
                         </button>
                     ) : (
-                        <button className={styles.outOfStockButton}>
-                            {this.props.product.inStock
+                        <button className={style.outOfStockButton}>
+                            {product.inStock
                                 ? "CHOOSE FEATURES"
                                 : "OUT OF STOCK"}
                         </button>
                     )}
-                    <div className={styles.productDescription}>
-                        {parse(this.props.product.description)}
+                    <div className={style.productDescription}>
+                        {parse(product.description)}
                     </div>
                 </div>
             </div>

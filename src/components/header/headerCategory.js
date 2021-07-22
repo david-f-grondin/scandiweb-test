@@ -1,30 +1,34 @@
 import React from "react";
-import styles from "./styles/headerCategory.module.scss";
+import style from "./styles/headerCategory.module.scss";
 import { getAllProductsAPI, getProductsByCategoryAPI } from "../../util/api";
 
 class HeaderCategory extends React.Component {
     handleClick = (e) => {
-        this.props.selectCategory(this.props.category);
+        const { category, selectCategory, setAllProducts } = this.props;
 
-        if (this.props.category === "all") {
+        selectCategory(category);
+        if (category === "all") {
             getAllProductsAPI().then((product) => {
-                this.props.setAllProducts(product);
+                setAllProducts(product);
             });
         } else {
-            getProductsByCategoryAPI(this.props.category).then((product) => {
-                this.props.setAllProducts(product);
+            getProductsByCategoryAPI(category).then((product) => {
+                setAllProducts(product);
             });
         }
     };
+
     render() {
+        const { category, selected } = this.props;
+
         return (
             <button
-                className={`${styles.category} ${
-                    this.props.selected ? styles.selected : ""
+                className={`${style.category} ${
+                    selected ? style.selected : ""
                 }`}
                 onClick={this.handleClick}
             >
-                <span>{this.props.category.toUpperCase()}</span>
+                <span>{category.toUpperCase()}</span>
             </button>
         );
     }

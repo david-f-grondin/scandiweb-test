@@ -15,49 +15,61 @@ class CartItems extends React.Component {
     removeItemClicked = (cartItem) => {
         this.props.removeItem(cartItem);
     };
+
+    getStyleMod = (styleMod) => {
+        switch (styleMod) {
+            case "1":
+                return style1;
+            case "2":
+                return style2;
+            default:
+                return style1;
+        }
+    };
+
     render() {
-        const styleMod = (() => {
-            switch (this.props.styleMod) {
-                case "1":
-                    return style1;
-                case "2":
-                    return style2;
-                default:
-                    return style1;
-            }
-        })();
+        const {
+            cartItems,
+            selectedCurrency,
+            selectAttribute,
+            styleMod,
+            filterAttributes,
+            filterAttributesHeader,
+        } = this.props;
+
+        const style = this.getStyleMod(styleMod);
 
         return (
             <div>
-                {this.props.cartItems.map((cartItem, index) => {
+                {cartItems.map((cartItem, index) => {
                     const price = productPriceSelector(
                         cartItem,
-                        this.props.selectedCurrency
+                        selectedCurrency
                     );
                     return (
                         <div
                             key={index}
-                            className={`${baseStyle.item} ${styleMod.item}`}
+                            className={`${baseStyle.item} ${style.item}`}
                         >
                             <div
-                                className={`${baseStyle.namePrice} ${styleMod.namePrice}`}
+                                className={`${baseStyle.namePrice} ${style.namePrice}`}
                             >
                                 <div
-                                    className={`${baseStyle.brand} ${styleMod.brand}`}
+                                    className={`${baseStyle.brand} ${style.brand}`}
                                 >
                                     <Link to={"/product/" + cartItem.id}>
                                         {cartItem.brand}
                                     </Link>
                                 </div>
                                 <div
-                                    className={`${baseStyle.name} ${styleMod.name}`}
+                                    className={`${baseStyle.name} ${style.name}`}
                                 >
                                     <Link to={"/product/" + cartItem.id}>
                                         {cartItem.name}
                                     </Link>
                                 </div>
                                 <div
-                                    className={`${baseStyle.price} ${styleMod.price}`}
+                                    className={`${baseStyle.price} ${style.price}`}
                                 >
                                     {convertToSymbol(price.currency) +
                                         price.amount.toFixed(2)}
@@ -66,35 +78,33 @@ class CartItems extends React.Component {
                             <div className={baseStyle.attributes}>
                                 <AttributesPicker
                                     product={cartItem}
-                                    styleMod={this.props.styleMod}
-                                    selectAttribute={this.props.selectAttribute}
-                                    filterAttributes={
-                                        this.props.filterAttributes
-                                    }
+                                    styleMod={styleMod}
+                                    selectAttribute={selectAttribute}
+                                    filterAttributes={filterAttributes}
                                     filterAttributesHeader={
-                                        this.props.filterAttributesHeader
+                                        filterAttributesHeader
                                     }
                                 />
                             </div>
                             <button
-                                className={`${baseStyle.addItem} ${baseStyle.button} ${styleMod.button}`}
+                                className={`${baseStyle.addItem} ${baseStyle.button} ${style.button}`}
                                 onClick={() => this.addToCartClicked(cartItem)}
                             />
                             <div
-                                className={`${baseStyle.countItems} ${styleMod.countItems}`}
+                                className={`${baseStyle.countItems} ${style.countItems}`}
                             >
                                 {cartItem.count}
                             </div>
                             <button
-                                className={`${baseStyle.removeItem} ${baseStyle.button} ${styleMod.button}`}
+                                className={`${baseStyle.removeItem} ${baseStyle.button} ${style.button}`}
                                 onClick={() => this.removeItemClicked(cartItem)}
                             />
                             <div
-                                className={`${baseStyle.image} ${styleMod.image}`}
+                                className={`${baseStyle.image} ${style.image}`}
                             >
                                 <ImageCarousel
                                     images={cartItem.gallery}
-                                    isNavigable={this.props.styleMod === "2"}
+                                    isNavigable={styleMod === "2"}
                                 />
                             </div>
                         </div>

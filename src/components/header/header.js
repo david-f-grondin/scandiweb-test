@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./styles/header.module.scss";
+import style from "./styles/header.module.scss";
 import { ReactComponent as HeaderLogo } from "../../images/a-logo.svg";
 
 class Header extends React.Component {
@@ -9,11 +9,12 @@ class Header extends React.Component {
             headerNavigation: HeaderNavigation,
             headerActions: HeaderActions,
         } = this.props;
+
         return (
-            <div className={styles.header}>
+            <div className={style.header}>
                 <HeaderNavigation />
                 <Link to="/">
-                    <button className={styles.headerLogoButton}>
+                    <button className={style.headerLogoButton}>
                         <HeaderLogo />
                     </button>
                 </Link>

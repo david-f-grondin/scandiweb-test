@@ -16,15 +16,18 @@ export const productsSlice = createSlice({
         },
         // Mutate state with new attribute selected
         selectAttribute: (state, action) => {
+            const {
+                product: actionProduct,
+                attributeSetId,
+                attributeId,
+            } = action.payload;
+
             const product = state.find(
-                (product) => product.id === action.payload.product.id
+                (product) => product.id === actionProduct.id
             );
 
-            const attributeSet = selectAttributeSet(
-                action.payload.attributeSetId,
-                product
-            );
-            selectAttributeInSet(action.payload.attributeId, attributeSet);
+            const attributeSet = selectAttributeSet(attributeSetId, product);
+            selectAttributeInSet(attributeId, attributeSet);
         },
     },
 });

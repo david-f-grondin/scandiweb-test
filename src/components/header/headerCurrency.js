@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles/headerCurrency.module.scss";
+import style from "./styles/headerCurrency.module.scss";
 import { ReactComponent as CurrencyArrow } from "../../images/currencyArrow.svg";
 import convertToSymbol from "../../util/currencyConverter";
 
@@ -41,33 +41,32 @@ class HeaderCurrency extends React.Component {
     };
 
     render() {
+        const { currencies, selectedCurrency, isCurencySwitcherOpen } =
+            this.props;
+
         return (
             <div
                 ref={this.currencySwitcherRef}
-                className={styles.currencyContainer}
+                className={style.currencyContainer}
             >
                 <button
-                    className={styles.currencyButton}
+                    className={style.currencyButton}
                     onClick={this.currencyClicked}
                 >
-                    <span className={styles.currency}>
-                        {convertToSymbol(this.props.selectedCurrency)}
+                    <span className={style.currency}>
+                        {convertToSymbol(selectedCurrency)}
                     </span>
                     <CurrencyArrow
-                        className={
-                            this.props.isCurencySwitcherOpen
-                                ? styles.arrowUp
-                                : ""
-                        }
+                        className={isCurencySwitcherOpen ? style.arrowUp : ""}
                     />
                 </button>
-                {this.props.isCurencySwitcherOpen && (
-                    <div className={styles.currencySwitcher}>
-                        {this.props.currencies?.map((currency) => {
+                {isCurencySwitcherOpen && (
+                    <div className={style.currencySwitcher}>
+                        {currencies?.map((currency) => {
                             return (
                                 <button
                                     key={currency}
-                                    className={styles.currencyOption}
+                                    className={style.currencyOption}
                                     onClick={() =>
                                         this.currencyOptionClicked(currency)
                                     }

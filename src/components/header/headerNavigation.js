@@ -1,22 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./styles/headerNavigation.module.scss";
+import style from "./styles/headerNavigation.module.scss";
 
 class HeaderNavigation extends React.Component {
     render() {
-        const { headerCategory: HeaderCategory } = this.props;
+        const {
+            categories,
+            selectedCategory,
+            headerCategory: HeaderCategory,
+        } = this.props;
+
         return (
-            <div className={styles.headerNavigation}>
+            <div className={style.headerNavigation}>
                 <Link to="/">
-                    {this.props.categories.map((category) => {
+                    {categories.map((category) => {
                         return (
                             <HeaderCategory
                                 key={category}
                                 category={category}
                                 selected={
-                                    category === this.props.selectedCategory
-                                        ? true
-                                        : false
+                                    category === selectedCategory ? true : false
                                 }
                             />
                         );

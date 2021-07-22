@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import styles from "./styles/plpProductCard.module.scss";
+import style from "./styles/plpProductCard.module.scss";
 import cartLogo from "../../images/emptyCart.svg";
 import convertToSymbol from "../../util/currencyConverter";
 import { productPriceSelector } from "../../store/selectors";
@@ -8,56 +8,53 @@ import { canBeAddedToCart } from "../../util/cartItemUtil";
 
 class PlpProductCard extends React.Component {
     cartButtonClicked = () => {
-        if (canBeAddedToCart(this.props.product)) {
-            this.props.addItem(this.props.product);
+        const { product, history, addItem } = this.props;
+
+        if (canBeAddedToCart(product)) {
+            addItem(product);
         } else {
-            this.props.history.push("/product/" + this.props.product.id);
+            history.push("/product/" + product.id);
         }
     };
+
     render() {
-        const price = productPriceSelector(
-            this.props.product,
-            this.props.selectedCurrency
-        );
+        const { product, selectedCurrency } = this.props;
+        const price = productPriceSelector(product, selectedCurrency);
+
         return (
-            <div className={styles.productsCard}>
-                <div className={styles.productImageContainer}>
-                    <Link to={"/product/" + this.props.product.id}>
+            <div className={style.productsCard}>
+                <div className={style.productImageContainer}>
+                    <Link to={"/product/" + product.id}>
                         <img
-                            className={`${styles.productImage} ${
-                                !this.props.product.inStock
-                                    ? styles.productImageOutOfStock
+                            className={`${style.productImage} ${
+                                !product.inStock
+                                    ? style.productImageOutOfStock
                                     : ""
                             }`}
-                            src={this.props.product.gallery[0]}
+                            src={product.gallery[0]}
                             alt=""
                         />
                     </Link>
 
-                    {!this.props.product.inStock ? (
-                        <span className={styles.outOfStockText}>
+                    {!product.inStock ? (
+                        <span className={style.outOfStockText}>
                             OUT OF STOCK
                         </span>
                     ) : (
                         <button
-                            className={styles.circle}
+                            className={style.circle}
                             onClick={this.cartButtonClicked}
                         >
                             <img src={cartLogo} alt="" />
                         </button>
                     )}
                 </div>
-                <div className={styles.productTitle}>
-                    <Link
-                        to={"/product/" + this.props.product.id}
-                        className={styles.link}
-                    >
-                        {this.props.product.brand +
-                            " " +
-                            this.props.product.name}
+                <div className={style.productTitle}>
+                    <Link to={"/product/" + product.id} className={style.link}>
+                        {product.brand + " " + product.name}
                     </Link>
                 </div>
-                <div className={styles.price}>
+                <div className={style.price}>
                     {convertToSymbol(price.currency) + price.amount.toFixed(2)}
                 </div>
             </div>

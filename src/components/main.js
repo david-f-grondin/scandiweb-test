@@ -3,7 +3,14 @@ import { Switch, Route } from "react-router-dom";
 
 class Main extends React.Component {
     render() {
-        const { plp: Plp, pdp: Pdp, cart: Cart } = this.props;
+        const {
+            plp: Plp,
+            pdp: Pdp,
+            cart: Cart,
+            isMinicartOpen,
+            setMinicartState,
+        } = this.props;
+
         return (
             <div style={mainContainerStyle}>
                 <Switch>
@@ -11,14 +18,14 @@ class Main extends React.Component {
                     <Route path="/cart" component={Cart}></Route>
                     <Route path="/product/:productId" component={Pdp}></Route>
                 </Switch>
-                {this.props.isMinicartOpen ? (
+                {isMinicartOpen && (
                     <div
                         style={overlayStyle}
                         onClick={() => {
-                            this.props.setMinicartState(false);
+                            setMinicartState(false);
                         }}
                     />
-                ) : null}
+                )}
             </div>
         );
     }
