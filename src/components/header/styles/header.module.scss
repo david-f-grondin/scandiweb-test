@@ -9,4 +9,7 @@
 
 .headerLogoButton {
     margin: 1.5em auto 0.813em auto;
+    > svg {
+        vertical-align: top;
+    }
 }
