@@ -1,23 +1,11 @@
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { addItem, removeItem, selectAttribute } from "../../slices/cart";
-import {
-    cartItemsSelector,
-    selectedCurrencySelector,
-} from "../../store/selectors";
+import { cartItemsSelector } from "../../store/selectors";
+import CartItem from "./cartItem";
 import CartItems from "../../components/cart/cartItems";
 
 const mapStateToProps = (state) => ({
     cartItems: cartItemsSelector(state),
-    selectedCurrency: selectedCurrencySelector(state),
+    cartItem: CartItem,
 });
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addItem: bindActionCreators(addItem, dispatch),
-        removeItem: bindActionCreators(removeItem, dispatch),
-        selectAttribute: bindActionCreators(selectAttribute, dispatch),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CartItems);
+export default connect(mapStateToProps)(CartItems);
