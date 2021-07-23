@@ -12,7 +12,8 @@ class AttributesPicker extends React.Component {
         });
     };
 
-    getStyleMod = (styleMod) => {
+    getStyleMod = () => {
+        const { styleMod } = this.props;
         switch (styleMod) {
             case "1":
                 return style1;
@@ -32,7 +33,7 @@ class AttributesPicker extends React.Component {
             styleMod,
         } = this.props;
 
-        const style = this.getStyleMod(styleMod);
+        const style = this.getStyleMod();
 
         return (
             <div

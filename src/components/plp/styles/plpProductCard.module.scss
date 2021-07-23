@@ -4,6 +4,10 @@
     max-width: 24.125rem;
 }
 
+.productCardOutOfStock {
+    color: var(--c-light-gray3);
+}
+
 .productImageContainer {
     position: relative;
     width: 22.125rem;
@@ -29,7 +33,6 @@
     font-weight: 400;
     font-size: 1.5rem;
     line-height: 1.6em;
-    color: var(--c-light-gray3);
 }
 
 .productTitle {
@@ -39,10 +42,6 @@
 
 .link:hover {
     text-decoration: underline;
-}
-
-.price {
-    font-weight: 500;
 }
 
 .productCard:hover {

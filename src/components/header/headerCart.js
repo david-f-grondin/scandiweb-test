@@ -55,12 +55,11 @@ class HeaderCart extends React.Component {
                         />
                         <div className={style.total}>
                             <span className={style.totalText}>Total</span>
-                            <span className={style.totalValue}>
-                                <Price
-                                    currency={selectedCurrency}
-                                    price={totalPrice}
-                                />
-                            </span>
+                            <Price
+                                currency={selectedCurrency}
+                                price={totalPrice}
+                                styleMod="3"
+                            />
                         </div>
                         <div className={style.buttonsContainer}>
                             <Link to="/cart">

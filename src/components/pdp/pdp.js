@@ -85,10 +85,11 @@ class Pdp extends React.Component {
                         selectAttribute={selectAttribute}
                     />
                     <div className={style.priceHeader}>PRICE:</div>
-                    <div className={style.price}>
+                    <div className={style.priceContainer}>
                         <Price
                             currency={selectedCurrency}
                             price={price.amount}
+                            styleMod="2"
                         />
                     </div>
                     {canBeAddedToCart(product) ? (

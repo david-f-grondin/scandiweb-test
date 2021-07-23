@@ -22,7 +22,11 @@ class PlpProductCard extends React.Component {
         const price = productPriceSelector(product, selectedCurrency);
 
         return (
-            <div className={style.productCard}>
+            <div
+                className={`${style.productCard} ${
+                    !product.inStock ? style.productCardOutOfStock : ""
+                }`}
+            >
                 <div className={style.productImageContainer}>
                     <Link to={"/product/" + product.id}>
                         <img
@@ -54,9 +58,11 @@ class PlpProductCard extends React.Component {
                         {product.brand + " " + product.name}
                     </Link>
                 </div>
-                <div className={style.price}>
-                    <Price currency={selectedCurrency} price={price.amount} />
-                </div>
+                <Price
+                    currency={selectedCurrency}
+                    price={price.amount}
+                    styleMod="1"
+                />
             </div>
         );
     }

@@ -41,9 +41,9 @@
     font-weight: 700;
     line-height: 1em;
 }
-.price {
-    composes: price from "../../general/styles/general.module.scss";
-    margin-bottom: 1.25rem;
+
+.priceContainer {
+    margin-bottom: 0.875rem;
 }
 
 .addToCartButton {

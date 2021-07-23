@@ -16,7 +16,8 @@ class CartItems extends React.Component {
         this.props.removeItem(cartItem);
     };
 
-    getStyleMod = (styleMod) => {
+    getStyleMod = () => {
+        const { styleMod } = this.props;
         switch (styleMod) {
             case "1":
                 return style1;
@@ -36,8 +37,7 @@ class CartItems extends React.Component {
             filterAttributes,
             filterAttributesHeader,
         } = this.props;
-
-        const style = this.getStyleMod(styleMod);
+        const style = this.getStyleMod();
 
         return (
             <div>
@@ -62,10 +62,11 @@ class CartItems extends React.Component {
                                         {cartItem.name}
                                     </Link>
                                 </div>
-                                <div className={style.price}>
+                                <div className={style.priceContainer}>
                                     <Price
                                         currency={selectedCurrency}
                                         price={price.amount}
+                                        styleMod={styleMod}
                                     />
                                 </div>
                             </div>

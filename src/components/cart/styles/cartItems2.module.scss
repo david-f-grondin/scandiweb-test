@@ -16,8 +16,7 @@
     composes: product__titleName from "../../general/styles/general.module.scss";
 }
 
-.price {
-    composes: price from "../../general/styles/general.module.scss";
+.priceContainer {
     padding: 1.625rem 0;
 }
 
