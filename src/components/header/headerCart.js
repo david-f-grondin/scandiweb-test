@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import style from "./styles/headerCart.module.scss";
-import convertToSymbol from "../../util/currencyConverter";
 import { computeCartTotal, countCartItems } from "../../util/cartItemUtil";
 import { ReactComponent as HeaderCartLogo } from "../../images/emptyCart.svg";
+import Price from "../general/price";
 
 class HeaderCart extends React.Component {
     minicartClicked = () => {
@@ -23,6 +23,7 @@ class HeaderCart extends React.Component {
             selectedCurrency,
             cartItems: CartItems,
         } = this.props;
+        const totalPrice = computeCartTotal(cart, selectedCurrency);
 
         return (
             <div className={style.cartContainer}>
@@ -55,11 +56,10 @@ class HeaderCart extends React.Component {
                         <div className={style.total}>
                             <span className={style.totalText}>Total</span>
                             <span className={style.totalValue}>
-                                {convertToSymbol(selectedCurrency) +
-                                    computeCartTotal(
-                                        cart,
-                                        selectedCurrency
-                                    ).toFixed(2)}
+                                <Price
+                                    currency={selectedCurrency}
+                                    price={totalPrice}
+                                />
                             </span>
                         </div>
                         <div className={style.buttonsContainer}>

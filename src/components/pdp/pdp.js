@@ -1,11 +1,11 @@
 import React from "react";
 import parse from "html-react-parser";
 import style from "./styles/pdp.module.scss";
-import convertToSymbol from "../../util/currencyConverter";
 import { productPriceSelector } from "../../store/selectors";
 import { getProductByIdAPI } from "../../util/api";
 import AttributesPicker from "../general/attributesPicker";
 import { canBeAddedToCart } from "../../util/cartItemUtil";
+import Price from "../general/price";
 
 class Pdp extends React.Component {
     constructor(props) {
@@ -86,7 +86,10 @@ class Pdp extends React.Component {
                     />
                     <div className={style.priceHeader}>PRICE:</div>
                     <div className={style.price}>
-                        {convertToSymbol(price.currency) + price.amount}
+                        <Price
+                            currency={selectedCurrency}
+                            price={price.amount}
+                        />
                     </div>
                     {canBeAddedToCart(product) ? (
                         <button

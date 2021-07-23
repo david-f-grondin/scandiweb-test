@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import baseStyle from "./styles/cartItems.module.scss";
 import style1 from "./styles/cartItems1.module.scss";
 import style2 from "./styles/cartItems2.module.scss";
-import convertToSymbol from "../../util/currencyConverter";
 import { productPriceSelector } from "../../store/selectors";
 import ImageCarousel from "./imageCarousel";
 import AttributesPicker from "../general/attributesPicker";
+import Price from "../general/price";
 
 class CartItems extends React.Component {
     addToCartClicked = (cartItem) => {
@@ -63,8 +63,10 @@ class CartItems extends React.Component {
                                     </Link>
                                 </div>
                                 <div className={style.price}>
-                                    {convertToSymbol(price.currency) +
-                                        price.amount.toFixed(2)}
+                                    <Price
+                                        currency={selectedCurrency}
+                                        price={price.amount}
+                                    />
                                 </div>
                             </div>
                             <div className={baseStyle.attributes}>

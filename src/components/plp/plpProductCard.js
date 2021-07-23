@@ -2,9 +2,9 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import style from "./styles/plpProductCard.module.scss";
 import cartLogo from "../../images/emptyCart.svg";
-import convertToSymbol from "../../util/currencyConverter";
 import { productPriceSelector } from "../../store/selectors";
 import { canBeAddedToCart } from "../../util/cartItemUtil";
+import Price from "../general/price";
 
 class PlpProductCard extends React.Component {
     cartButtonClicked = () => {
@@ -55,7 +55,7 @@ class PlpProductCard extends React.Component {
                     </Link>
                 </div>
                 <div className={style.price}>
-                    {convertToSymbol(price.currency) + price.amount.toFixed(2)}
+                    <Price currency={selectedCurrency} price={price.amount} />
                 </div>
             </div>
         );
