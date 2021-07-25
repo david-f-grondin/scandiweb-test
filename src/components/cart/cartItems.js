@@ -1,7 +1,7 @@
 import React from "react";
 
 class CartItems extends React.Component {
-    render() {
+    renderCartItems() {
         const {
             cartItem: CartItem,
             cartItems,
@@ -10,21 +10,21 @@ class CartItems extends React.Component {
             filterAttributesHeader,
         } = this.props;
 
-        return (
-            <div>
-                {cartItems.map((cartItem, index) => {
-                    return (
-                        <CartItem
-                            key={index}
-                            cartItem={cartItem}
-                            styleMod={styleMod}
-                            filterAttributes={filterAttributes}
-                            filterAttributesHeader={filterAttributesHeader}
-                        />
-                    );
-                })}
-            </div>
-        );
+        return cartItems.map((cartItem, index) => {
+            return (
+                <CartItem
+                    key={index}
+                    cartItem={cartItem}
+                    styleMod={styleMod}
+                    filterAttributes={filterAttributes}
+                    filterAttributesHeader={filterAttributesHeader}
+                />
+            );
+        });
+    }
+
+    render() {
+        return <div>{this.renderCartItems()}</div>;
     }
 }
 

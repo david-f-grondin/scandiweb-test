@@ -9,54 +9,70 @@ class ImageCarousel extends React.Component {
     }
 
     previousImgClicked = () => {
-        const index = this.state.index;
-        const images = this.props.images;
+        const { index } = this.state;
+        const { images } = this.props;
 
         if (index > 0) this.setState({ index: index - 1 });
         else this.setState({ index: images.length - 1 });
     };
 
     nextImgClicked = () => {
-        const index = this.state.index;
-        const images = this.props.images;
+        const { index } = this.state;
+        const { images } = this.props;
 
         if (index < images.length - 1) {
             this.setState({ index: index + 1 });
         } else this.setState({ index: 0 });
     };
 
-    render() {
+    renderIfNavigable(content) {
         const { images, isNavigable } = this.props;
+
+        return isNavigable && images.length > 1 && content;
+    }
+
+    renderPreviousButton() {
+        return (
+            <button
+                className={style.previousButton}
+                onClick={this.previousImgClicked}
+            >
+                <img
+                    className={style.previousArrow}
+                    src={arrowCarousel}
+                    alt=""
+                ></img>
+            </button>
+        );
+    }
+
+    renderNextButton() {
+        return (
+            <button className={style.nextButton} onClick={this.nextImgClicked}>
+                <img
+                    className={style.nextArrow}
+                    src={arrowCarousel}
+                    alt=""
+                ></img>
+            </button>
+        );
+    }
+
+    render() {
+        const { images } = this.props;
         const { index } = this.state;
 
         return (
             <div className={style.imageCarousel}>
                 <div className={style.helperImage} />
-                <img className={style.image} src={images[index]} alt=""></img>
 
-                {isNavigable && images.length > 1 && (
-                    <button
-                        className={style.previousButton}
-                        onClick={this.previousImgClicked}
-                    >
-                        <img
-                            className={style.previousArrow}
-                            src={arrowCarousel}
-                            alt=""
-                        ></img>
-                    </button>
-                )}
-                {isNavigable && images.length > 1 && (
-                    <button
-                        className={style.nextButton}
-                        onClick={this.nextImgClicked}
-                    >
-                        <img
-                            className={style.nextArrow}
-                            src={arrowCarousel}
-                            alt=""
-                        ></img>
-                    </button>
+                <img className={style.image} src={images[index]} alt="" />
+
+                {this.renderIfNavigable(
+                    <>
+                        {this.renderPreviousButton()}
+                        {this.renderNextButton()}
+                    </>
                 )}
             </div>
         );

@@ -8,6 +8,7 @@ class Cart extends React.Component {
         return (
             <div className={style.cartContainer}>
                 <div className={style.cartTitle}>CART</div>
+
                 <CartItems
                     styleMod="2"
                     filterAttributesHeader={filterAttributesHeader}

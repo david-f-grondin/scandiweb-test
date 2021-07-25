@@ -4,7 +4,7 @@
     border-top: 1px solid var(--c-light-gray2);
 }
 
-.namePrice {
+.titlePrice {
     composes: product__title from "../../general/styles/general.module.scss";
 }
 

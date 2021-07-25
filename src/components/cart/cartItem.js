@@ -9,7 +9,15 @@ import AttributesPicker from "../general/attributesPicker";
 import Price from "../general/price";
 
 class CartItem extends React.Component {
-    getStyleMod = () => {
+    addToCartClicked = (cartItem) => {
+        this.props.addItem(cartItem);
+    };
+
+    removeItemClicked = (cartItem) => {
+        this.props.removeItem(cartItem);
+    };
+
+    getStyleMod() {
         const { styleMod } = this.props;
         switch (styleMod) {
             case "1":
@@ -19,75 +27,117 @@ class CartItem extends React.Component {
             default:
                 return style1;
         }
-    };
+    }
 
-    addToCartClicked = (cartItem) => {
-        this.props.addItem(cartItem);
-    };
+    renderTitlePrice(style) {
+        const { cartItem, styleMod, selectedCurrency } = this.props;
+        const price = productPriceSelector(cartItem, selectedCurrency);
 
-    removeItemClicked = (cartItem) => {
-        this.props.removeItem(cartItem);
-    };
+        return (
+            <div className={style.titlePrice}>
+                <div className={style.brand}>
+                    <Link to={"/product/" + cartItem.id}>{cartItem.brand}</Link>
+                </div>
 
-    render() {
+                <div className={style.name}>
+                    <Link to={"/product/" + cartItem.id}>{cartItem.name}</Link>
+                </div>
+
+                <div className={style.priceContainer}>
+                    <Price
+                        currency={selectedCurrency}
+                        price={price.amount}
+                        styleMod={styleMod}
+                    />
+                </div>
+            </div>
+        );
+    }
+
+    renderAttributes() {
         const {
             cartItem,
             styleMod,
-            selectedCurrency,
             selectAttribute,
             filterAttributes,
             filterAttributesHeader,
         } = this.props;
-        const style = this.getStyleMod();
-        const price = productPriceSelector(cartItem, selectedCurrency);
 
         return (
-            <div className={`${baseStyle.item} ${style.item}`}>
-                <div className={style.namePrice}>
-                    <div className={style.brand}>
-                        <Link to={"/product/" + cartItem.id}>
-                            {cartItem.brand}
-                        </Link>
-                    </div>
-                    <div className={style.name}>
-                        <Link to={"/product/" + cartItem.id}>
-                            {cartItem.name}
-                        </Link>
-                    </div>
-                    <div className={style.priceContainer}>
-                        <Price
-                            currency={selectedCurrency}
-                            price={price.amount}
-                            styleMod={styleMod}
-                        />
-                    </div>
-                </div>
-                <div className={baseStyle.attributes}>
-                    <AttributesPicker
-                        product={cartItem}
-                        styleMod={styleMod}
-                        selectAttribute={selectAttribute}
-                        filterAttributes={filterAttributes}
-                        filterAttributesHeader={filterAttributesHeader}
-                    />
-                </div>
-                <button
-                    className={`${baseStyle.addItem} ${baseStyle.button} ${style.button}`}
-                    onClick={() => this.addToCartClicked(cartItem)}
+            <div className={baseStyle.attributes}>
+                <AttributesPicker
+                    product={cartItem}
+                    styleMod={styleMod}
+                    selectAttribute={selectAttribute}
+                    filterAttributes={filterAttributes}
+                    filterAttributesHeader={filterAttributesHeader}
                 />
-                <div className={`${baseStyle.countItems} ${style.countItems}`}>
-                    {cartItem.count}
-                </div>
-                <button
-                    className={`${baseStyle.removeItem} ${baseStyle.button} ${style.button}`}
-                    onClick={() => this.removeItemClicked(cartItem)}
+            </div>
+        );
+    }
+
+    renderAddItemButton(style) {
+        const { cartItem } = this.props;
+        const addItemButtonClassName = `${baseStyle.addItem} ${baseStyle.button} ${style.button}`;
+
+        return (
+            <button
+                className={addItemButtonClassName}
+                onClick={() => this.addToCartClicked(cartItem)}
+            />
+        );
+    }
+
+    renderRemoveItemButton(style) {
+        const { cartItem } = this.props;
+        const removeItemButtonClassName = `${baseStyle.removeItem} ${baseStyle.button} ${style.button}`;
+
+        return (
+            <button
+                className={removeItemButtonClassName}
+                onClick={() => this.removeItemClicked(cartItem)}
+            />
+        );
+    }
+
+    renderItemCount(style) {
+        const { cartItem } = this.props;
+        const countItemClassName = `${baseStyle.countItems} ${style.countItems}`;
+
+        return <div className={countItemClassName}>{cartItem.count}</div>;
+    }
+
+    renderImageCarousel(style) {
+        const { cartItem, styleMod } = this.props;
+        const imageCarouselClassName = `${baseStyle.image} ${style.image}`;
+
+        return (
+            <div className={imageCarouselClassName}>
+                <ImageCarousel
+                    images={cartItem.gallery}
+                    isNavigable={styleMod === "2"}
                 />
-                <div className={`${baseStyle.image} ${style.image}`}>
-                    <ImageCarousel
-                        images={cartItem.gallery}
-                        isNavigable={styleMod === "2"}
-                    />
-                </div>
+            </div>
+        );
+    }
+
+    render() {
+        const style = this.getStyleMod();
+        const cartItemClassName = `${baseStyle.item} ${style.item}`;
+
+        return (
+            <div className={cartItemClassName}>
+                {this.renderTitlePrice(style)}
+
+                {this.renderAttributes()}
+
+                {this.renderAddItemButton(style)}
+
+                {this.renderItemCount(style)}
+
+                {this.renderRemoveItemButton(style)}
+
+                {this.renderImageCarousel(style)}
             </div>
         );
     }
