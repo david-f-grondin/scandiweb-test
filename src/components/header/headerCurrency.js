@@ -22,16 +22,19 @@ class HeaderCurrency extends React.Component {
     }
 
     handleClickOutside(event) {
+        const { currencySwitcherRef } = this;
         if (
-            this.currencySwitcherRef &&
-            !this.currencySwitcherRef.current.contains(event.target)
+            currencySwitcherRef &&
+            !currencySwitcherRef.current.contains(event.target)
         ) {
             this.closeCurrencySwitcher();
         }
     }
 
     currencyClicked = (e) => {
-        if (this.props.isCurencySwitcherOpen) this.closeCurrencySwitcher();
+        const { isCurencySwitcherOpen } = this.props;
+
+        if (isCurencySwitcherOpen) this.closeCurrencySwitcher();
         else this.openCurrencySwitcher();
     };
 
@@ -40,42 +43,68 @@ class HeaderCurrency extends React.Component {
         this.closeCurrencySwitcher();
     };
 
-    render() {
-        const { currencies, selectedCurrency, isCurencySwitcherOpen } =
-            this.props;
+    renderCurrencyOption(currency) {
+        const currencyOptionContent =
+            convertToSymbol(currency) + " " + currency;
 
+        return (
+            <button
+                key={currency}
+                className={style.currencyOption}
+                onClick={() => this.currencyOptionClicked(currency)}
+            >
+                {currencyOptionContent}
+            </button>
+        );
+    }
+
+    renderCurrencySwitcher() {
+        const { currencies } = this.props;
+
+        return (
+            <div className={style.currencySwitcher}>
+                {currencies?.map((currency) => {
+                    return this.renderCurrencyOption(currency);
+                })}
+            </div>
+        );
+    }
+
+    renderIfCurrencySwitcherOpen(content) {
+        const { isCurencySwitcherOpen } = this.props;
+
+        return isCurencySwitcherOpen && content;
+    }
+
+    renderHeaderCurrencyButton() {
+        const { selectedCurrency, isCurencySwitcherOpen } = this.props;
+        const selectedCurrencySymbol = convertToSymbol(selectedCurrency);
+        const currencyArrowClassName = isCurencySwitcherOpen
+            ? style.arrowUp
+            : "";
+
+        return (
+            <button
+                className={style.currencyButton}
+                onClick={this.currencyClicked}
+            >
+                <span className={style.currency}>{selectedCurrencySymbol}</span>
+
+                <CurrencyArrow className={currencyArrowClassName} />
+            </button>
+        );
+    }
+
+    render() {
         return (
             <div
                 ref={this.currencySwitcherRef}
                 className={style.currencyContainer}
             >
-                <button
-                    className={style.currencyButton}
-                    onClick={this.currencyClicked}
-                >
-                    <span className={style.currency}>
-                        {convertToSymbol(selectedCurrency)}
-                    </span>
-                    <CurrencyArrow
-                        className={isCurencySwitcherOpen ? style.arrowUp : ""}
-                    />
-                </button>
-                {isCurencySwitcherOpen && (
-                    <div className={style.currencySwitcher}>
-                        {currencies?.map((currency) => {
-                            return (
-                                <button
-                                    key={currency}
-                                    className={style.currencyOption}
-                                    onClick={() =>
-                                        this.currencyOptionClicked(currency)
-                                    }
-                                >
-                                    {convertToSymbol(currency) + " " + currency}
-                                </button>
-                            );
-                        })}
-                    </div>
+                {this.renderHeaderCurrencyButton()}
+
+                {this.renderIfCurrencySwitcherOpen(
+                    this.renderCurrencySwitcher()
                 )}
             </div>
         );

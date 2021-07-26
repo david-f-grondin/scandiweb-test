@@ -32,15 +32,16 @@ class CartItem extends React.Component {
     renderTitlePrice(style) {
         const { cartItem, styleMod, selectedCurrency } = this.props;
         const price = productPriceSelector(cartItem, selectedCurrency);
+        const linkToProduct = "/product/" + cartItem.id;
 
         return (
             <div className={style.titlePrice}>
                 <div className={style.brand}>
-                    <Link to={"/product/" + cartItem.id}>{cartItem.brand}</Link>
+                    <Link to={linkToProduct}>{cartItem.brand}</Link>
                 </div>
 
                 <div className={style.name}>
-                    <Link to={"/product/" + cartItem.id}>{cartItem.name}</Link>
+                    <Link to={linkToProduct}>{cartItem.name}</Link>
                 </div>
 
                 <div className={style.priceContainer}>
@@ -78,7 +79,11 @@ class CartItem extends React.Component {
 
     renderAddItemButton(style) {
         const { cartItem } = this.props;
-        const addItemButtonClassName = `${baseStyle.addItem} ${baseStyle.button} ${style.button}`;
+        const addItemButtonClassName = `
+            ${baseStyle.addItem} 
+            ${baseStyle.button} 
+            ${style.button}
+        `;
 
         return (
             <button
@@ -90,7 +95,11 @@ class CartItem extends React.Component {
 
     renderRemoveItemButton(style) {
         const { cartItem } = this.props;
-        const removeItemButtonClassName = `${baseStyle.removeItem} ${baseStyle.button} ${style.button}`;
+        const removeItemButtonClassName = `
+            ${baseStyle.removeItem} 
+            ${baseStyle.button} 
+            ${style.button}
+        `;
 
         return (
             <button
@@ -102,7 +111,10 @@ class CartItem extends React.Component {
 
     renderItemCount(style) {
         const { cartItem } = this.props;
-        const countItemClassName = `${baseStyle.countItems} ${style.countItems}`;
+        const countItemClassName = `
+            ${baseStyle.countItems}
+            ${style.countItems}
+        `;
 
         return <div className={countItemClassName}>{cartItem.count}</div>;
     }

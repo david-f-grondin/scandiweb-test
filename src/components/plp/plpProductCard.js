@@ -17,52 +17,80 @@ class PlpProductCard extends React.Component {
         }
     };
 
-    render() {
+    renderProductPrice() {
         const { product, selectedCurrency } = this.props;
         const price = productPriceSelector(product, selectedCurrency);
 
         return (
-            <div
-                className={`${style.productCard} ${
-                    !product.inStock ? style.productCardOutOfStock : ""
-                }`}
-            >
-                <div className={style.productImageContainer}>
-                    <Link to={"/product/" + product.id}>
-                        <img
-                            className={`${style.productImage} ${
-                                !product.inStock
-                                    ? style.productImageOutOfStock
-                                    : ""
-                            }`}
-                            src={product.gallery[0]}
-                            alt=""
-                        />
-                    </Link>
+            <Price
+                currency={selectedCurrency}
+                price={price.amount}
+                styleMod="1"
+            />
+        );
+    }
 
-                    {!product.inStock ? (
-                        <span className={style.outOfStockText}>
-                            OUT OF STOCK
-                        </span>
-                    ) : (
-                        <button
-                            className={style.circle}
-                            onClick={this.cartButtonClicked}
-                        >
-                            <img src={cartLogo} alt="" />
-                        </button>
-                    )}
+    renderOutOfStockText() {
+        return <span className={style.outOfStockText}>OUT OF STOCK</span>;
+    }
+
+    renderCartButton() {
+        return (
+            <button className={style.circle} onClick={this.cartButtonClicked}>
+                <img src={cartLogo} alt="" />
+            </button>
+        );
+    }
+
+    renderProductImage() {
+        const { id, gallery, inStock } = this.props.product;
+        const linkToProduct = "/product/" + id;
+        const imageClassName = `
+            ${style.productImage} 
+            ${!inStock ? style.productImageOutOfStock : ""}
+        `;
+
+        return (
+            <Link to={linkToProduct}>
+                <img className={imageClassName} src={gallery[0]} alt="" />
+            </Link>
+        );
+    }
+
+    renderProductTitle() {
+        const { id, brand, name } = this.props.product;
+        const linkToProduct = "/product/" + id;
+        const productTitle = brand + " " + name;
+
+        return (
+            <div className={style.productTitle}>
+                <Link to={linkToProduct} className={style.link}>
+                    {productTitle}
+                </Link>
+            </div>
+        );
+    }
+
+    render() {
+        const { inStock } = this.props.product;
+        const productCardClassName = `
+            ${style.productCard} 
+            ${!inStock ? style.productCardOutOfStock : ""}
+        `;
+
+        return (
+            <div className={productCardClassName}>
+                <div className={style.productImageContainer}>
+                    {this.renderProductImage()}
+
+                    {inStock
+                        ? this.renderCartButton()
+                        : this.renderOutOfStockText()}
                 </div>
-                <div className={style.productTitle}>
-                    <Link to={"/product/" + product.id} className={style.link}>
-                        {product.brand + " " + product.name}
-                    </Link>
-                </div>
-                <Price
-                    currency={selectedCurrency}
-                    price={price.amount}
-                    styleMod="1"
-                />
+
+                {this.renderProductTitle()}
+
+                {this.renderProductPrice()}
             </div>
         );
     }

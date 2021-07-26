@@ -10,7 +10,7 @@ import Price from "../general/price";
 class Pdp extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { imageDisplayed: 0 };
+        this.state = { imageDisplayedIndex: 0 };
     }
 
     componentDidMount() {
@@ -20,13 +20,13 @@ class Pdp extends React.Component {
         // In case the app start directly on the pdp page
         if (typeof product === "undefined") {
             getProductByIdAPI(productId).then((product) => {
-                setAllProducts([product]);
+                if (product) setAllProducts([product]);
             });
         }
     }
 
     imagePicked = (index) => {
-        this.setState({ imageDisplayed: index });
+        this.setState({ imageDisplayedIndex: index });
     };
 
     addToCartClicked = () => {
@@ -37,81 +37,156 @@ class Pdp extends React.Component {
         }
     };
 
-    render() {
-        const { product, selectedCurrency, selectAttribute } = this.props;
+    renderUnavailableButton() {
+        const { inStock } = this.props.product;
+        const buttonContent = inStock ? "CHOOSE FEATURES" : "OUT OF STOCK";
 
-        if (typeof product === "undefined") {
-            return (
-                <div>
-                    <h1>Sorry, this product is not available.</h1>
-                </div>
-            );
-        }
+        return (
+            <button className={style.outOfStockButton}>{buttonContent}</button>
+        );
+    }
 
+    renderProductDescription() {
+        const { description } = this.props.product;
+        const parsedDescription = parse(description);
+
+        return (
+            <div className={style.productDescription}>{parsedDescription}</div>
+        );
+    }
+
+    renderAddToCartButton() {
+        return (
+            <button
+                className={style.addToCartButton}
+                onClick={this.addToCartClicked}
+            >
+                ADD TO CART
+            </button>
+        );
+    }
+
+    renderProductInfoButton() {
+        const { product } = this.props;
+
+        return canBeAddedToCart(product)
+            ? this.renderAddToCartButton()
+            : this.renderUnavailableButton();
+    }
+
+    renderProductPrice() {
+        const { product, selectedCurrency } = this.props;
         const price = productPriceSelector(product, selectedCurrency);
 
         return (
-            <div className={style.pdpContainer}>
-                <div className={style.imagePicker}>
-                    {product.gallery.map((image, index) => {
-                        return (
-                            <button
-                                key={index}
-                                onClick={() => this.imagePicked(index)}
-                            >
-                                <img src={image} alt=""></img>
-                            </button>
-                        );
-                    })}
-                </div>
-                <div className={style.mainImageContainer}>
-                    <img
-                        src={product.gallery[this.state.imageDisplayed]}
-                        alt=""
-                    ></img>
-                </div>
-                <div className={style.productInfoContainer}>
-                    <div className={style.productTitle}>
-                        <div className={style.productTitleBrand}>
-                            {product.brand}
-                        </div>
-                        <div className={style.productTitleName}>
-                            {product.name}
-                        </div>
-                    </div>
-                    <AttributesPicker
+            <>
+                <div className={style.priceHeader}>PRICE:</div>
+                <div className={style.priceContainer}>
+                    <Price
+                        currency={selectedCurrency}
+                        price={price.amount}
                         styleMod="2"
-                        product={product}
-                        selectAttribute={selectAttribute}
                     />
-                    <div className={style.priceHeader}>PRICE:</div>
-                    <div className={style.priceContainer}>
-                        <Price
-                            currency={selectedCurrency}
-                            price={price.amount}
-                            styleMod="2"
-                        />
-                    </div>
-                    {canBeAddedToCart(product) ? (
-                        <button
-                            className={style.addToCartButton}
-                            onClick={this.addToCartClicked}
-                        >
-                            ADD TO CART
-                        </button>
-                    ) : (
-                        <button className={style.outOfStockButton}>
-                            {product.inStock
-                                ? "CHOOSE FEATURES"
-                                : "OUT OF STOCK"}
-                        </button>
-                    )}
-                    <div className={style.productDescription}>
-                        {parse(product.description)}
-                    </div>
                 </div>
+            </>
+        );
+    }
+
+    renderProductTitle() {
+        const { brand, name } = this.props.product;
+
+        return (
+            <div className={style.productTitle}>
+                <div className={style.productTitleBrand}>{brand}</div>
+                <div className={style.productTitleName}>{name}</div>
             </div>
         );
+    }
+
+    renderProductInfo() {
+        const { product, selectAttribute } = this.props;
+
+        return (
+            <div className={style.productInfoContainer}>
+                {this.renderProductTitle()}
+
+                <AttributesPicker
+                    styleMod="2"
+                    product={product}
+                    selectAttribute={selectAttribute}
+                />
+
+                {this.renderProductPrice()}
+
+                {this.renderProductInfoButton()}
+
+                {this.renderProductDescription()}
+            </div>
+        );
+    }
+
+    renderMainImage() {
+        const { gallery } = this.props.product;
+        const { imageDisplayedIndex } = this.state;
+        const imageDisplayed = gallery[imageDisplayedIndex];
+
+        return (
+            <div className={style.mainImageContainer}>
+                <img src={imageDisplayed} alt="" />
+            </div>
+        );
+    }
+
+    renderImagePickerButton(image, index) {
+        return (
+            <button key={index} onClick={() => this.imagePicked(index)}>
+                <img src={image} alt="" />
+            </button>
+        );
+    }
+
+    renderImagePicker() {
+        const { gallery } = this.props.product;
+
+        return (
+            <div className={style.imagePicker}>
+                {gallery.map((image, index) => {
+                    return this.renderImagePickerButton(image, index);
+                })}
+            </div>
+        );
+    }
+
+    renderProductUnavailable() {
+        return (
+            <div>
+                <h1>Sorry, this product is not available.</h1>
+            </div>
+        );
+    }
+
+    renderPdp() {
+        return (
+            <div className={style.pdpContainer}>
+                {this.renderImagePicker()}
+
+                {this.renderMainImage()}
+
+                {this.renderProductInfo()}
+            </div>
+        );
+    }
+
+    renderPdpIfProductDefined() {
+        const { product } = this.props;
+
+        return typeof product !== "undefined"
+            ? this.renderPdp()
+            : this.renderProductUnavailable();
+    }
+
+    render() {
+        return this.renderPdpIfProductDefined();
     }
 }
 

@@ -10,7 +10,7 @@ class Price extends React.Component {
         return convertToSymbol(currency) + price.toFixed(2);
     }
 
-    getStyleMod = () => {
+    getStyleMod() {
         const { styleMod } = this.props;
         switch (styleMod) {
             case "1":
@@ -22,7 +22,7 @@ class Price extends React.Component {
             default:
                 return style1;
         }
-    };
+    }
 
     render() {
         const style = this.getStyleMod();

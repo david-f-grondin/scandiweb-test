@@ -13,11 +13,13 @@ class Header extends React.Component {
         return (
             <div className={style.header}>
                 <HeaderNavigation />
+
                 <Link to="/">
                     <button className={style.headerLogoButton}>
                         <HeaderLogo />
                     </button>
                 </Link>
+
                 <HeaderActions />
             </div>
         );
