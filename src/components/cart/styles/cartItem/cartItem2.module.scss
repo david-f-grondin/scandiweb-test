@@ -5,15 +5,15 @@
 }
 
 .titlePrice {
-    composes: product__title from "../../general/styles/general.module.scss";
+    composes: product__title from "../../../general/styles/general.module.scss";
 }
 
 .brand {
-    composes: product__titleBrand from "../../general/styles/general.module.scss";
+    composes: product__titleBrand from "../../../general/styles/general.module.scss";
 }
 
 .name {
-    composes: product__titleName from "../../general/styles/general.module.scss";
+    composes: product__titleName from "../../../general/styles/general.module.scss";
 }
 
 .priceContainer {

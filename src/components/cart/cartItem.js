@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import baseStyle from "./styles/cartItem.module.scss";
-import style1 from "./styles/cartItem1.module.scss";
-import style2 from "./styles/cartItem2.module.scss";
+import baseStyle from "./styles/cartItem/cartItem.module.scss";
+import style1 from "./styles/cartItem/cartItem1.module.scss";
+import style2 from "./styles/cartItem/cartItem2.module.scss";
 import { productPriceSelector } from "../../store/selectors";
 import ImageCarousel from "./imageCarousel";
 import AttributesPicker from "../general/attributesPicker";

@@ -1,3 +1,5 @@
+import { countCartItems } from "../util/cartItemUtil";
+
 // Categories
 export const categoriesSelector = ({ categories }) => categories.categories;
 export const selectedCategorySelector = ({ categories }) =>
@@ -23,6 +25,7 @@ export const selectedCurrencySelector = ({ currencies }) =>
 export const cartItemSelector = ({ products }, productId) =>
     products.find((product) => product.id === productId);
 export const cartItemsSelector = ({ cart }) => cart;
+export const cartItemsCountSelector = ({ cart }) => countCartItems(cart);
 
 // States
 export const currencySwitcherStateSelector = ({ states }) =>

@@ -1,7 +1,7 @@
 import React from "react";
-import style1 from "./styles/price1.module.scss";
-import style2 from "./styles/price2.module.scss";
-import style3 from "./styles/price3.module.scss";
+import style1 from "./styles/price/price1.module.scss";
+import style2 from "./styles/price/price2.module.scss";
+import style3 from "./styles/price/price3.module.scss";
 import convertToSymbol from "../../util/currencyConverter";
 
 class Price extends React.Component {

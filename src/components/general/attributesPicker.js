@@ -1,7 +1,7 @@
 import React from "react";
-import baseStyle from "./styles/attributesPicker.module.scss";
-import style1 from "./styles/attributesPicker1.module.scss";
-import style2 from "./styles/attributesPicker2.module.scss";
+import baseStyle from "./styles/attributesPicker/attributesPicker.module.scss";
+import style1 from "./styles/attributesPicker/attributesPicker1.module.scss";
+import style2 from "./styles/attributesPicker/attributesPicker2.module.scss";
 
 class AttributesPicker extends React.Component {
     attributeClicked = (attributeSetId, attributeId) => {

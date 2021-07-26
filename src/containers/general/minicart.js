@@ -1,17 +1,17 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import HeaderCart from "../../components/header/headerCart";
+import Minicart from "../../components/general/minicart";
 import {
-    minicartStateSelector,
-    cartItemsCountSelector,
+    cartItemsSelector,
+    selectedCurrencySelector,
 } from "../../store/selectors";
 import { setMinicartState } from "../../slices/states";
-import Minicart from "../general/minicart";
+import CartItems from "../cart/cartItems";
 
 const mapStateToProps = (state) => ({
-    cartItemsCount: cartItemsCountSelector(state),
-    isMinicartOpen: minicartStateSelector(state),
-    minicart: Minicart,
+    cart: cartItemsSelector(state),
+    selectedCurrency: selectedCurrencySelector(state),
+    cartItems: CartItems,
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -20,4 +20,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderCart);
+export default connect(mapStateToProps, mapDispatchToProps)(Minicart);
