@@ -1,0 +1,50 @@
+.productInfoContainer {
+    margin-left: 8.92%;
+    width: 26.04%;
+}
+
+.productTitle {
+    composes: product__title from "../../general/styles/general.module.scss";
+    margin-bottom: 2.688rem;
+}
+
+.productTitleBrand {
+    composes: product__titleBrand from "../../general/styles/general.module.scss";
+}
+
+.productTitleName {
+    composes: product__titleName from "../../general/styles/general.module.scss";
+}
+
+.priceHeader {
+    margin: 2.5rem 0 1.5rem 0;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1em;
+}
+
+.priceContainer {
+    margin-bottom: 0.875rem;
+}
+
+.addToCartButton {
+    composes: button--green from "../../general/styles/general.module.scss";
+    width: 100%;
+    line-height: 1.2em;
+    margin: 1.25rem 0 2.5rem 0;
+    padding: 1rem 0;
+}
+
+.outOfStockButton {
+    @extend .addToCartButton;
+    font-weight: 600;
+    color: var(--c-white);
+    background-color: var(--c-light-gray3);
+}
+
+.productDescription {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    line-height: 1.6rem;
+}
