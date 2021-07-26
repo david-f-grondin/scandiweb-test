@@ -2,15 +2,14 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import HeaderCurrency from "../../components/header/headerCurrency";
 import {
-    currenciesSelector,
     selectedCurrencySelector,
     currencySwitcherStateSelector,
 } from "../../store/selectors";
 import { setCurrencySwitcherState } from "../../slices/states";
-import { selectCurrency } from "../../slices/currencies";
+import CurrencySwitcher from "../general/currencySwitcher";
 
 const mapStateToProps = (state) => ({
-    currencies: currenciesSelector(state),
+    currencySwitcher: CurrencySwitcher,
     selectedCurrency: selectedCurrencySelector(state),
     isCurencySwitcherOpen: currencySwitcherStateSelector(state),
 });
@@ -21,7 +20,6 @@ const mapDispatchToProps = (dispatch) => {
             setCurrencySwitcherState,
             dispatch
         ),
-        selectCurrency: bindActionCreators(selectCurrency, dispatch),
     };
 };
 

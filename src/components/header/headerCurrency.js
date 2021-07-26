@@ -16,17 +16,18 @@ class HeaderCurrency extends React.Component {
         this.props.setCurrencySwitcherState(true);
     }
 
-    closeCurrencySwitcher() {
+    closeCurrencySwitcher = () => {
         document.removeEventListener("mousedown", this.handleClickOutside);
         this.props.setCurrencySwitcherState(false);
-    }
+    };
 
     handleClickOutside(event) {
         const { currencySwitcherRef } = this;
-        if (
+        const isClickOutside =
             currencySwitcherRef &&
-            !currencySwitcherRef.current.contains(event.target)
-        ) {
+            !currencySwitcherRef.current.contains(event.target);
+
+        if (isClickOutside) {
             this.closeCurrencySwitcher();
         }
     }
@@ -38,35 +39,13 @@ class HeaderCurrency extends React.Component {
         else this.openCurrencySwitcher();
     };
 
-    currencyOptionClicked = (currency) => {
-        this.props.selectCurrency(currency);
-        this.closeCurrencySwitcher();
-    };
-
-    renderCurrencyOption(currency) {
-        const currencyOptionContent =
-            convertToSymbol(currency) + " " + currency;
-
-        return (
-            <button
-                key={currency}
-                className={style.currencyOption}
-                onClick={() => this.currencyOptionClicked(currency)}
-            >
-                {currencyOptionContent}
-            </button>
-        );
-    }
-
     renderCurrencySwitcher() {
-        const { currencies } = this.props;
+        const { currencySwitcher: CurrencySwitcher } = this.props;
 
         return (
-            <div className={style.currencySwitcher}>
-                {currencies?.map((currency) => {
-                    return this.renderCurrencyOption(currency);
-                })}
-            </div>
+            <CurrencySwitcher
+                closeCurrencySwitcher={this.closeCurrencySwitcher}
+            />
         );
     }
 
