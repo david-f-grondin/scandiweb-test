@@ -1,0 +1,23 @@
+/* Used in Minicart */
+.attributesButton {
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    margin-right: 0.5rem;
+    border: 1px solid var(--c-black);
+    cursor: default;
+}
+
+.selectedButton {
+    color: var(--c-light-gray);
+    background-color: var(--c-light-gray-transparent);
+    border: 1px solid var(--c-light-gray);
+}
+
+.textAttribute > * {
+    margin: 0 0.125rem;
+}
+
+.swatchAttribute.selectedButton {
+    padding: 1px;
+    border: 2px solid var(--c-black);
+}

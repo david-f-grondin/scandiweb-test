@@ -1,0 +1,9 @@
+/* Used in Minicart */
+.attributeSet:not(:first-child) {
+    margin-top: 0.25rem;
+}
+
+.attributeSetName {
+    font-weight: 300;
+    line-height: 1.6em;
+}

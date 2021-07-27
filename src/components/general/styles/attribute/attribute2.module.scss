@@ -1,0 +1,25 @@
+/* Used in Cart Page and PDP */
+.attributesButton {
+    min-width: 3.938rem;
+    min-height: 2.813rem;
+    margin-right: 0.75rem;
+    border: 1px solid var(--c-black);
+}
+
+.selectedButton {
+    color: var(--c-white);
+    background-color: var(--c-black);
+}
+
+.textAttribute > * {
+    margin: 0 0.5rem;
+}
+
+.swatchAttribute.attributesButton {
+    border: 1px solid var(--c-light-gray);
+}
+
+.swatchAttribute.selectedButton {
+    padding: 2px;
+    border: 2px solid var(--c-black);
+}
