@@ -82,6 +82,7 @@ However, personal decisions had to be made on points that were not specified in 
     -   Logo in header, redirects to the PLP.
     -   Product card image/product name, redirects to PDP.
     -   Product card circle button (appear only if product is not out of stock), redirects to PDP. Or, if no attributes are required, add the product to cart and stay on PLP.
+    -   Add to cart button on PDP, add the product to cart but stay on current page.
     -   Cart, clicking on the product name/brand redirects to the PDP.
     -   Mini cart, view cart button, redirects to the cart page.
     -   Mini cart, check out button, do nothing.
