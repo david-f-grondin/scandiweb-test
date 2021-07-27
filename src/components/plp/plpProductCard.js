@@ -17,6 +17,15 @@ class PlpProductCard extends React.Component {
         }
     };
 
+    getProductCardClassName() {
+        const { inStock } = this.props.product;
+
+        return `
+            ${style.productCard} 
+            ${!inStock ? style.productCardOutOfStock : ""}
+        `;
+    }
+
     renderProductPrice() {
         const { product, selectedCurrency } = this.props;
         const price = productPriceSelector(product, selectedCurrency);
@@ -40,6 +49,12 @@ class PlpProductCard extends React.Component {
                 <img src={cartLogo} alt="" />
             </button>
         );
+    }
+
+    renderCartButtonIfInStock() {
+        const { inStock } = this.props.product;
+
+        return inStock ? this.renderCartButton() : this.renderOutOfStockText();
     }
 
     renderProductImage() {
@@ -72,20 +87,14 @@ class PlpProductCard extends React.Component {
     }
 
     render() {
-        const { inStock } = this.props.product;
-        const productCardClassName = `
-            ${style.productCard} 
-            ${!inStock ? style.productCardOutOfStock : ""}
-        `;
+        const productCardClassName = this.getProductCardClassName();
 
         return (
             <div className={productCardClassName}>
                 <div className={style.productImageContainer}>
                     {this.renderProductImage()}
 
-                    {inStock
-                        ? this.renderCartButton()
-                        : this.renderOutOfStockText()}
+                    {this.renderCartButtonIfInStock()}
                 </div>
 
                 {this.renderProductTitle()}

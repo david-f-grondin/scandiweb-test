@@ -28,16 +28,23 @@
     margin-bottom: 0.875rem;
 }
 
-.addToCartButton {
-    composes: button--green from "../../general/styles/general.module.scss";
+.baseButton {
     width: 100%;
     line-height: 1.2em;
     margin: 1.25rem 0 2.5rem 0;
     padding: 1rem 0;
 }
 
+.addToCartButton {
+    composes: button--green from "../../general/styles/general.module.scss";
+    @extend .baseButton;
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
 .outOfStockButton {
-    @extend .addToCartButton;
+    @extend .baseButton;
     font-weight: 600;
     color: var(--c-white);
     background-color: var(--c-light-gray3);

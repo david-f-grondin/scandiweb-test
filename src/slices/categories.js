@@ -13,7 +13,7 @@ export const categoriesSlice = createSlice({
             return { ...state, selectedCategory: action.payload };
         },
         // Set all categories from an array and add the category 'all'
-        setAllCategories: (state, action) => {
+        setAllCategories: (...[, action]) => {
             let categories = action.payload;
             if (categories !== undefined && !categories.includes("all")) {
                 categories.push("all");

@@ -73,4 +73,7 @@
     &:hover {
         box-shadow: 0px 4px 35px hsl(210, 5%, 67%);
     }
+    &:active {
+        transform: scale(0.94);
+    }
 }
